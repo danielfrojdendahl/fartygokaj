@@ -4,20 +4,20 @@ public class Personnel{
 
 	private String firstName;
 	private String lastName;
-	private int id; //do we need this?
+	//private int id; //do we need this?
 	private int persId;
-	private int driversLicence;
-	private int status;
-	private int schemaType;
+	private String driversLicence;
+	private String status;
+	private String schemaType;
 
 
 
-	public Personnel(String firstName, String lastName, int id, int persId, int driversLicence, int status,
-			int schemaType) {
+	public Personnel(String firstName, String lastName, int persId, String driversLicence, String status,
+			String schemaType) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.id = id;
+		//this.id = id;
 		this.persId = persId;
 		this.driversLicence = driversLicence;
 		this.status = status;
@@ -67,21 +67,21 @@ public class Personnel{
 
 
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
 
 
-	public int getId() {
-		return id;
-	}
+//	public int getId() {
+//		return id;
+//	}
 
 
 
@@ -91,13 +91,13 @@ public class Personnel{
 
 
 
-	public int getDriversLicence() {
+	public String getDriversLicence() {
 		return driversLicence;
 	}
 
 
 
-	public int getSchemaType() {
+	public String getSchemaType() {
 		return schemaType;
 	}
 
