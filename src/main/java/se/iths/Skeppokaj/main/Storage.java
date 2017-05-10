@@ -8,6 +8,7 @@ import se.iths.Skeppokaj.domain.Personnel;
 
 public interface Storage{
 	public void addPersonnel(Personnel p);
+	public void deletePersonnel(Personnel p);
 //  public List<Movie>getMoviesByActorName(String actorName);
 //  public List<Actor>getActorsByMovieTitle(String title);
 //  public List<Movie>getAllMovies();

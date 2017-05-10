@@ -63,6 +63,26 @@ public class DBStorage implements Storage{
 		}
 	}
 	
+	public void deletePersonnel(Personnel p){
+		
+		if(hasConnection()){
+			Statement stm = null;
+			int persID = p.getPersId(); 
+			
+			try{
+				String sql = "DELETE FROM personal WHERE p_id =" + persID;
+				stm = con.createStatement();
+				stm.executeUpdate(sql);
+				System.out.println("Person borttagen");
+				
+			}catch(SQLException e){
+				System.out.println(e.toString());
+				System.out.println("Kunde inte ta bort person");
+			}
+			
+		}
+	}
+	
 	// SQL way - Using strings  - it's more efficient to use IDs however ;-)
 	//  public List<Movie>getMoviesByActorName(String actorName){
 	//    List<Movie> movies = new ArrayList<>();
