@@ -16,11 +16,11 @@ import se.iths.Skeppokaj.main.Storage;
  */
 public class DBStorage implements Storage{
 
-	//Change path to db path!
+	//Change to your db name and path!
 	private static final String PATH = "jdbc:sqlite:skeppokaj.db";
 	private static Connection con;
 
-	static{ // Will run once, when this class is loaded
+	static{ // Will run once, when this class is loaded. Connection to db is initiated.
 		try{
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection(PATH);
@@ -29,13 +29,16 @@ public class DBStorage implements Storage{
 		}
 	}
 
+	//Do we have a connection?
 	public boolean hasConnection(){
 		return con != null;
 	}
 
+	//Method to add persons to the personnel db
 	public void addPersonnel(Personnel p){
-		//System.out.println("CONNECTION: "+hasConnection());
+		
 		if(hasConnection()){
+			//Preparation of data to put in db
 			Statement stm = null;
 			String firstName = p.getFirstName();
 			String lastName = p.getLastName();
@@ -43,29 +46,23 @@ public class DBStorage implements Storage{
 			String driversLicence = p.getDriversLicence();
 			String status = p.getStatus();
 			String schemaType = p.getSchemaType();
+			
 			try{
+				//SQL-statement to insert data in db
 				String sql = "INSERT INTO personal(p_id,Firstname,Lastname,License,Status,Schema) VALUES(" + persId + ",'" + firstName +
 						"','" + lastName + "','"+ driversLicence + "','" + status + "','" + schemaType + "')";
-				System.out.println(sql);
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println(firstName + " " + lastName +" has been successfully added.");
+				
 			}catch(SQLException e){
 				System.out.println(e.toString());
 				System.out.println("Can't add person " + firstName + " " + lastName +". Please check insert statement!");
 			}
 			//Alerts.display("Wrong" ,"date format incorrect");
-			finally {
-				if (con != null) {
-					try {
-						con.close(); // <-- This is important
-					} catch (SQLException e) {
-						/* handle exception */
-					}
-				}
-			}
 		}
 	}
+	
 	// SQL way - Using strings  - it's more efficient to use IDs however ;-)
 	//  public List<Movie>getMoviesByActorName(String actorName){
 	//    List<Movie> movies = new ArrayList<>();

@@ -22,7 +22,6 @@ public class Main{
 			case "1":
 				Personnel p = new Personnel("Harry","Hare",201,"A","Ledig","S");
 				storage.addPersonnel(p);
-				System.out.println("Häpp!");
 				break;
 			case "2":
 				//System.out.println(storage.getAllActors());
