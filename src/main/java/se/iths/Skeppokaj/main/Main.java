@@ -24,6 +24,8 @@ public class Main{
 				storage.addPersonnel(p);
 				break;
 			case "2":
+				Personnel h = new Personnel("Harry","Hare",201,"A","Ledig","S");
+				storage.deletePersonnel(h);
 				//System.out.println(storage.getAllActors());
 				break;
 			case "3":
