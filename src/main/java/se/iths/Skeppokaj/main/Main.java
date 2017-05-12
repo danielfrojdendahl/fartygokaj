@@ -29,8 +29,8 @@ public class Main{
 				//System.out.println(storage.getAllActors());
 				break;
 			case "3":
-				String actor = TextUtil.getReply("Actor: ");
-				System.out.println("Movies for " + actor + ": ");
+				Personnel q = new Personnel("Harry", "Hare",201,"A","Semester","S");
+				storage.updateStatusPersonnel(q);
 				//System.out.println(storage.getMoviesByActorName(actor));
 				break;
 			case "4":

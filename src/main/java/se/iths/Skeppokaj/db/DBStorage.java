@@ -36,7 +36,7 @@ public class DBStorage implements Storage{
 
 	//Method to add persons to the personnel db
 	public void addPersonnel(Personnel p){
-		
+
 		if(hasConnection()){
 			//Preparation of data to put in db
 			Statement stm = null;
@@ -46,43 +46,62 @@ public class DBStorage implements Storage{
 			String driversLicence = p.getDriversLicence();
 			String status = p.getStatus();
 			String schemaType = p.getSchemaType();
-			
+
 			try{
 				//SQL-statement to insert data in db
 				String sql = "INSERT INTO personal(p_id,Firstname,Lastname,License,Status,Schema) VALUES(" + persId + ",'" + firstName +
 						"','" + lastName + "','"+ driversLicence + "','" + status + "','" + schemaType + "')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println(firstName + " " + lastName +" has been successfully added.");
-				
+				System.out.println(firstName + " " + lastName +" adderad till databasen.");
+
 			}catch(SQLException e){
 				System.out.println(e.toString());
-				System.out.println("Can't add person " + firstName + " " + lastName +". Please check insert statement!");
+				System.out.println("Kan inte lägga till person " + firstName + " " + lastName +". Vänligen kontrollera insert statement!");
 			}
 			//Alerts.display("Wrong" ,"date format incorrect");
 		}
 	}
-	
+
 	public void deletePersonnel(Personnel p){
-		
+
 		if(hasConnection()){
 			Statement stm = null;
 			int persID = p.getPersId(); 
-			
+
 			try{
 				String sql = "DELETE FROM personal WHERE p_id =" + persID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Person borttagen");
-				
+
 			}catch(SQLException e){
 				System.out.println(e.toString());
-				System.out.println("Kunde inte ta bort person");
+				System.out.println("Kunde inte ta bort person, "+p.getFirstName()+" "+p.getLastName());
 			}
-			
+
 		}
 	}
-	
+
+	public void updateStatusPersonnel(Personnel p) {
+		if(hasConnection()){
+			Statement stm = null;
+			int persID = p.getPersId(); 
+			String status = p.getStatus();
+
+			try{
+				String sql = "UPDATE personal SET Status='"+status+"' WHERE p_id =" + persID;
+				stm = con.createStatement();
+				stm.executeUpdate(sql);
+				System.out.println("Person "+ p.getFirstName()+" "+p.getLastName()+", status uppdaterad.");
+
+			}catch(SQLException e){
+				System.out.println(e.toString());
+				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName());
+			}
+		}
+	}
+
 	// SQL way - Using strings  - it's more efficient to use IDs however ;-)
 	//  public List<Movie>getMoviesByActorName(String actorName){
 	//    List<Movie> movies = new ArrayList<>();
