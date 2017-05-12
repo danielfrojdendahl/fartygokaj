@@ -6,9 +6,9 @@ public class Main{
 		while(true){
 			Storage storage = new DBStorage();
 			String choice = "";
-			System.out.println("1. List all movies");
-			System.out.println("2. List all actors");
-			System.out.println("3. Look up an actor");
+			System.out.println("1. Lägg till ny personal i databasen");
+			System.out.println("2. Ta bort personal ur databasen");
+			System.out.println("3. Uppdatera status för personal");
 			System.out.println("4. Look up a movie");
 			System.out.println("5. Quit");
 			while(!(choice.equals("1")||
@@ -26,12 +26,10 @@ public class Main{
 			case "2":
 				Personnel h = new Personnel("Harry","Hare",201,"A","Ledig","S");
 				storage.deletePersonnel(h);
-				//System.out.println(storage.getAllActors());
 				break;
 			case "3":
-				String actor = TextUtil.getReply("Actor: ");
-				System.out.println("Movies for " + actor + ": ");
-				//System.out.println(storage.getMoviesByActorName(actor));
+				Personnel q = new Personnel("Harry", "Hare",201,"A","Semester","S");
+				storage.updateStatusPersonnel(q);
 				break;
 			case "4":
 				String movie = TextUtil.getReply("Movie title: ");

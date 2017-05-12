@@ -105,7 +105,7 @@ public class Personnel{
 
 	@Override
 	public String toString(){
-		return new StringBuilder(firstName)  //how do we want a person to be printed? just name?
+		return new StringBuilder(firstName+" "+lastName)  //how do we want a person to be printed? just name?
 				.toString();
 	}
 }
