@@ -1,6 +1,6 @@
 PRAGMA foreign_keys=ON;
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS personal (p_id INTEGER PRIMARY KEY NOT NULL, Firstname TEXT, Lastname TEXT, License TEXT, Status TEXT, Schema TEXT);
+CREATE TABLE IF NOT EXISTS personal (p_id INTEGER PRIMARY KEY NOT NULL, Firstname TEXT, Lastname TEXT, License TEXT, Status TEXT check(Status in('100%','50%','0%','Sjuk','VAB','Studier','Semester')), Schema TEXT);
 INSERT INTO "personal" ("p_id","Firstname","Lastname","License","Status","Schema") VALUES (1,"Melanie","Thompson","A","100%","MF");
 INSERT INTO "personal" ("p_id","Firstname","Lastname","License","Status","Schema") VALUES (2,"Yael","Clements","A","100%","MF");
 INSERT INTO "personal" ("p_id","Firstname","Lastname","License","Status","Schema") VALUES (3,"Griffin","White","A","100%","MF");
