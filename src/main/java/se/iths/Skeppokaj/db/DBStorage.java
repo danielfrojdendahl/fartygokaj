@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import se.iths.Skeppokaj.domain.Machines;
 import se.iths.Skeppokaj.domain.Personnel;
 //import org.iths.domain.Movie;
 //import org.iths.domain.Actor;
@@ -60,6 +61,7 @@ public class DBStorage implements Storage{
 				System.out.println("Kan inte lägga till person " + firstName + " " + lastName +". Vänligen kontrollera insert statement!");
 			}
 			//Alerts.display("Wrong" ,"date format incorrect");
+			
 		}
 	}
 
@@ -102,13 +104,13 @@ public class DBStorage implements Storage{
 		}
 		}
 
-		public void addMachine(Machine m) {
+		public void addMachine(Machines m) {
 
 			if(hasConnection()){
 				Statement stm = null;
-				String machineType = m.getmachineType();
-				String machineStatus = m.getmachineStatus();
-				int machineCost = m.machineCost();
+				String machineType = m.getMachineType();
+				String machineStatus = m.getMachineStatus();
+				int machineCost = m.getMachineCost();
 
 
 				try{
@@ -126,11 +128,11 @@ public class DBStorage implements Storage{
 
 		}
 
-		public void deleteMachine(Machine m) {
+		public void deleteMachine(Machines m) {
 			if(hasConnection()){
 				Statement stm = null;
-				int machineType = m.getmachineType();
-				String machineStatus = m.machineStatus();
+				String machineType = m.getMachineType();
+				String machineStatus = m.getMachineStatus();
 				
 				try{
 					String sql = "DELETE FROM trucks WHERE p_id =" + machineType + machineStatus;
@@ -140,27 +142,27 @@ public class DBStorage implements Storage{
 
 				}catch(SQLException e){
 					System.out.println(e.toString());
-					System.out.println("Kunde inte ta bort maskinen, "+m.getmachineType()+" "+m.getmachineStatus());
+					System.out.println("Kunde inte ta bort maskinen, "+m.getMachineType()+" "+m.getMachineStatus());
 				}
 
 			}
+		}
 			
-		public void updateMachine(Machine m) {
+		public void updateMachine(Machines m) {
 			 if (hasConnection()){
-			        
+	             Statement stm = null;
+	             int truckid = m.getMachineID();
+	             String truckstatus = m.getMachineStatus();
 			            
 			        try{
-			             Statement stm = null;
-			             int truckid = m.getmachineID();
-			             String truckstatus = m.getMachineStatus();
 			             String sql = "UPDATE trucks SET T_status='" +truckstatus+ "' WHERE T_id =" + truckid;
 			             stm = con.createStatement();
 			             stm.executeUpdate(sql);
-			             System.out.println("Trucken " + m.truckid()+ " "+m.truckstatus+", Status uppdaterad");
+			             System.out.println("Trucken " +truckid+ " "+truckstatus+", Status uppdaterad");
 			                
 			         }catch(SQLException e){
 			                System.out.println(e.toString());
-			                System.out.println("Kunde inte uppdatera truck, " +m.truckid()+ " " +m.truckstatus);
+			                System.out.println("Kunde inte uppdatera truck, " +truckid+ " " +truckstatus);
 			                }
 			    }
 
