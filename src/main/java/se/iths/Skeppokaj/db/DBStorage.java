@@ -100,81 +100,128 @@ public class DBStorage implements Storage{
 				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName());
 			}
 		}
-	}
 
-	// SQL way - Using strings  - it's more efficient to use IDs however ;-)
-	//  public List<Movie>getMoviesByActorName(String actorName){
-	//    List<Movie> movies = new ArrayList<>();
-	//    try{
-	//      String sql = "select title, name from movies "+
-	//        "natural join actors_movies natural join actors "+
-	//        "where actors.name = '" + actorName +"'";
-	//    
-	//      ResultSet rs = con.createStatement().executeQuery(sql);
-	//      while(rs.next()){
-	//        Movie m = new Movie.MovieBuilder()
-	//          .title(rs.getString("title"))
-	//          .build();
-	//        movies.add(m);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }      
-	//    return movies;
-	//  }
-	//  // SQL way - Using strings  - it's more efficient to use IDs however ;-)
-	//  public List<Actor>getActorsByMovieTitle(String title){
-	//    List<Actor> actors = new ArrayList<>();     
-	//    try{
-	//      con = DriverManager.getConnection("jdbc:sqlite:movies.db");
-	//      String sql = "select title, name from movies "+
-	//        "natural join actors_movies natural join actors "+
-	//        "where movies.title = '" + title +"'";
-	//    
-	//      ResultSet rs = con.createStatement().executeQuery(sql);
-	//      while(rs.next()){
-	//        Actor a = new Actor.ActorBuilder()
-	//          .name(rs.getString("name"))
-	//          .build();
-	//        actors.add(a);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }
-	//    return actors;
-	//  }
-	//  public List<Actor>getAllActors(){
-	//    List<Actor>allActors = new ArrayList<>();
-	//    try{
-	//      ResultSet rs=con.createStatement().executeQuery("select name from actors");
-	//      while(rs.next()){
-	//        Actor a = new Actor.ActorBuilder()
-	//          .name(rs.getString("name"))
-	//          .build();
-	//        allActors.add(a);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }
-	//    return allActors;
-	//  }
-	//  public List<Movie>getAllMovies(){
-	//    List<Movie> allMovies = new ArrayList<>();
-	//    try{
-	//      ResultSet rs=con.createStatement().executeQuery("select title from movies");
-	//      while(rs.next()){
-	//        Movie m = new Movie.MovieBuilder()
-	//          .title(rs.getString("title"))
-	//          .build();
-	//        allMovies.add(m);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }
-	//    return allMovies;
-	//  }
-}
+		public void addMachine(Machine m) {
+
+			if(hasConnection()){
+				Statement stm = null;
+				String machineType = m.getmachineType();
+				String machineStatus = m.getmachineStatus();
+				int machineCost = m.machineCost();
+
+
+				try{
+					String sql = "INSERT INTO trucks(T_type,T_status,T_cost) VALUES(" + machineType + "','" + machineStatus + "','" + machineCost + "')";
+					stm = con.createStatement();
+					stm.executeUpdate(sql);
+					System.out.println(machineType + "är nu adderad till databasen.");
+				}
+
+				catch(SQLException ex){
+					System.out.println(ex);
+					System.out.println("Kan inte lägga till maskin" + " " + machineType +". Vänligen kontrollera insert statement");
+				}
+			}
+
+		}
+
+		public void deleteMachine(Machine m) {
+			if(hasConnection()){
+				Statement stm = null;
+				int machineID = m.getmachineID();
+				
+				try{
+					String sql = "DELETE FROM trucks WHERE p_id =" + machineType + machineStatus;
+					stm = con.createStatement();
+					stm.executeUpdate(sql);
+					System.out.println("Maskin borttagen");
+
+				}catch(SQLException e){
+					System.out.println(e.toString());
+					System.out.println("Kunde inte ta bort maskinen, "+m.getmachineType()+" "+m.getmachineStatus());
+				}
+
+			}
+			
+		
+
+
+			}
+		}
+
+		// SQL way - Using strings  - it's more efficient to use IDs however ;-)
+		//  public List<Movie>getMoviesByActorName(String actorName){
+		//    List<Movie> movies = new ArrayList<>();
+		//    try{
+		//      String sql = "select title, name from movies "+
+		//        "natural join actors_movies natural join actors "+
+		//        "where actors.name = '" + actorName +"'";
+		//    
+		//      ResultSet rs = con.createStatement().executeQuery(sql);
+		//      while(rs.next()){
+		//        Movie m = new Movie.MovieBuilder()
+		//          .title(rs.getString("title"))
+		//          .build();
+		//        movies.add(m);
+		//      }
+		//    }catch(SQLException e){
+		//      System.err.println("Error: " + e.getMessage());
+		//      e.printStackTrace();
+		//    }      
+		//    return movies;
+		//  }
+		//  // SQL way - Using strings  - it's more efficient to use IDs however ;-)
+		//  public List<Actor>getActorsByMovieTitle(String title){
+		//    List<Actor> actors = new ArrayList<>();     
+		//    try{
+		//      con = DriverManager.getConnection("jdbc:sqlite:movies.db");
+		//      String sql = "select title, name from movies "+
+		//        "natural join actors_movies natural join actors "+
+		//        "where movies.title = '" + title +"'";
+		//    
+		//      ResultSet rs = con.createStatement().executeQuery(sql);
+		//      while(rs.next()){
+		//        Actor a = new Actor.ActorBuilder()
+		//          .name(rs.getString("name"))
+		//          .build();
+		//        actors.add(a);
+		//      }
+		//    }catch(SQLException e){
+		//      System.err.println("Error: " + e.getMessage());
+		//      e.printStackTrace();
+		//    }
+		//    return actors;
+		//  }
+		//  public List<Actor>getAllActors(){
+		//    List<Actor>allActors = new ArrayList<>();
+		//    try{
+		//      ResultSet rs=con.createStatement().executeQuery("select name from actors");
+		//      while(rs.next()){
+		//        Actor a = new Actor.ActorBuilder()
+		//          .name(rs.getString("name"))
+		//          .build();
+		//        allActors.add(a);
+		//      }
+		//    }catch(SQLException e){
+		//      System.err.println("Error: " + e.getMessage());
+		//      e.printStackTrace();
+		//    }
+		//    return allActors;
+		//  }
+		//  public List<Movie>getAllMovies(){
+		//    List<Movie> allMovies = new ArrayList<>();
+		//    try{
+		//      ResultSet rs=con.createStatement().executeQuery("select title from movies");
+		//      while(rs.next()){
+		//        Movie m = new Movie.MovieBuilder()
+		//          .title(rs.getString("title"))
+		//          .build();
+		//        allMovies.add(m);
+		//      }
+		//    }catch(SQLException e){
+		//      System.err.println("Error: " + e.getMessage());
+		//      e.printStackTrace();
+		//    }
+		//    return allMovies;
+		//  }
+	}
