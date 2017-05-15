@@ -11,7 +11,7 @@ public class PersonnelTest {
 	
 	@Before
 	public void before(){
-		p = new Personnel("Harry","Hare",201,"A","Ledig","S");
+		p = new Personnel(201,"Harry","Hare","A","Ledig","S");
 	}
 
 	@Test

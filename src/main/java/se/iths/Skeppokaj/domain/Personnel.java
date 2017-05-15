@@ -12,18 +12,30 @@ public class Personnel{
 
 
 
-	public Personnel(String firstName, String lastName, int persId, String driversLicence, String status,
+	public Personnel(String firstName, String lastName, String driversLicence, String status,
 			String schemaType) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		//this.id = id;
-		this.persId = persId;
+		//this.persId = persId;
 		this.driversLicence = driversLicence;
 		this.status = status;
 		this.schemaType = schemaType;
 	}
 
+	public Personnel(int persID,String firstName, String lastName, String driversLicence, String status,
+			String schemaType) {
+		super();
+		this.persId =  persID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		//this.id = id;
+		//this.persId = persId;
+		this.driversLicence = driversLicence;
+		this.status = status;
+		this.schemaType = schemaType;
+	}
 
 
 	//	  private Personnel(PersonnelBuilder ab){

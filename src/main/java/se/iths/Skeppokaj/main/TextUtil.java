@@ -6,4 +6,9 @@ public class TextUtil{
     System.out.println(prompt);
     return new Scanner(System.in).nextLine();
   }
+  
+//  public static int getReplyInt(String prompt){
+//	  System.out.println(prompt);
+//	  return new Scanner(System.in).nextInt();
+//  }
 }
