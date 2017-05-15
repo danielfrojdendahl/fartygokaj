@@ -189,7 +189,6 @@ public class DBStorage implements Storage{
 				System.out.println("Kunde inte uppdatera truck, " +truckid+ " " +truckstatus);
 			}
 		}
-
 	}
 }
 

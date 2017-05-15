@@ -32,7 +32,11 @@ public class Main{
 				String schemaType = TextUtil.getReply("Schematyp: ");
 
 				Personnel p = new Personnel(name,surName,driversLicence,status,schemaType);
-				storage.addPersonnel(p);
+				if(storage.addPersonnel(p)){
+					System.out.println("Adderat ok");
+				}else{
+					System.out.println("Addering gick fel, kolla .err");
+				}
 				break;
 			case "2":
 				System.out.println("Ta bort personal");
@@ -44,7 +48,11 @@ public class Main{
 				}else{
 					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
 					Personnel p2 = personnel2.get(0);
-					storage.deletePersonnel(p2);
+					if(storage.deletePersonnel(p2)){
+						System.out.println("Borttagning ok");
+					}else{
+						System.out.println("Borttagning fungerade ej, kolla .err");
+					}
 				}
 				break;
 			case "3":
@@ -57,7 +65,11 @@ public class Main{
 				}else{
 					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
 					Personnel p3 = personnel3.get(0);
-					storage.updateStatusPersonnel(p3);
+					if(storage.updateStatusPersonnel(p3)){
+						System.out.println("Status uppdaterad ok");
+					}else{
+						System.out.println("Kunde ej uppdatera status, kolla .err");
+					}
 				}
 				break;
 			case "4":
