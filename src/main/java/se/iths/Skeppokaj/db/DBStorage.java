@@ -155,11 +155,11 @@ public class DBStorage implements Storage{
 	public void deleteMachine(Machines m) {
 		if(hasConnection()){
 			Statement stm = null;
-			String machineType = m.getMachineType();
-			String machineStatus = m.getMachineStatus();
+			int machineID = m.getMachineID();
+			
 
 			try{
-				String sql = "DELETE FROM trucks WHERE p_id =" + machineType + machineStatus;
+				String sql = "DELETE FROM trucks WHERE m_id =" + machineID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Maskin borttagen");
