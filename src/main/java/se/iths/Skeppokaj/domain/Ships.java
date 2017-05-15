@@ -15,6 +15,7 @@ public class Ships {
 		this.volume 	= volume;
 	}
 	
+	
 	public Ships(String shipName, String company, String volume) {
 		super();
 		this.shipName 	= shipName;
