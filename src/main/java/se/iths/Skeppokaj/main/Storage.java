@@ -12,7 +12,7 @@ public interface Storage{
 	public boolean deletePersonnel(Personnel p);
 	public boolean updateStatusPersonnel(Personnel p);
 	public List<Personnel> getPersonnelByID(int persID);
-	public void addMachine(Machines m);
-	public void deleteMachine(Machines m);
-	public void updateMachine(Machines m);
+	public boolean addMachine(Machines m);
+	public boolean deleteMachine(Machines m);
+	public boolean updateMachine(Machines m);
 }

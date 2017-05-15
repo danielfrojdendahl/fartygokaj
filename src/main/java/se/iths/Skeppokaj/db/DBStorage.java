@@ -128,7 +128,7 @@ public class DBStorage implements Storage{
 	}
 
 
-	public void addMachine(Machines m) {
+	public boolean addMachine(Machines m) {
 
 		if(hasConnection()){
 			Statement stm = null;
@@ -142,6 +142,7 @@ public class DBStorage implements Storage{
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println(machineType + "är nu adderad till databasen.");
+				return true;
 			}
 
 			catch(SQLException ex){
@@ -149,10 +150,11 @@ public class DBStorage implements Storage{
 				System.out.println("Kan inte lägga till maskin" + " " + machineType +". Vänligen kontrollera insert statement");
 			}
 		}
+		return false;
 
 	}
 
-	public void deleteMachine(Machines m) {
+	public boolean deleteMachine(Machines m) {
 		if(hasConnection()){
 			Statement stm = null;
 			int machineID = m.getMachineID();
@@ -163,6 +165,7 @@ public class DBStorage implements Storage{
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Maskin borttagen");
+				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.toString());
@@ -170,9 +173,10 @@ public class DBStorage implements Storage{
 			}
 
 		}
+		return false;
 	}
 
-	public void updateMachine(Machines m) {
+	public boolean updateMachine(Machines m) {
 		if (hasConnection()){
 			Statement stm = null;
 			int truckid = m.getMachineID();
@@ -183,12 +187,14 @@ public class DBStorage implements Storage{
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Trucken " +truckid+ " "+truckstatus+", Status uppdaterad");
+				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.toString());
 				System.out.println("Kunde inte uppdatera truck, " +truckid+ " " +truckstatus);
 			}
 		}
+		return false;
 	}
 }
 
