@@ -3,24 +3,24 @@ package se.iths.Skeppokaj.domain;
 public class Ships {
 	
 	private int		shipID;
-	private String	volume;
+	private String	shipVolume;
 	private String 	shipName;
-	private String 	company;
+	private String 	shipCompany;
 	
-	public Ships(int shipID, String shipName, String company, String volume) {
+	public Ships(int shipID, String shipName, String shipCompany, String shipVolume) {
 		super();
-		this.shipID		= shipID;
-		this.shipName 	= shipName;
-		this.company 	= company;
-		this.volume 	= volume;
+		this.shipID			= shipID;
+		this.shipName 		= shipName;
+		this.shipCompany 	= shipCompany;
+		this.shipVolume 	= shipVolume;
 	}
 	
 	
-	public Ships(String shipName, String company, String volume) {
+	public Ships(String shipName, String shipCompany, String shipVolume) {
 		super();
-		this.shipName 	= shipName;
-		this.company 	= company;
-		this.volume 	= volume;
+		this.shipName 		= shipName;
+		this.shipCompany 	= shipCompany;
+		this.shipVolume 	= shipVolume;
 	}
 		
 	
@@ -45,22 +45,22 @@ public class Ships {
 	
 		
 	public String getCompany() {
-		return company;
+		return shipCompany;
 	}
 
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setCompany(String shipCompany) {
+		this.shipCompany = shipCompany;
 	}
 	
 		
 	public String getVolume() {
-		return volume;
+		return shipVolume;
 	}
 	
 		
-	public void setVolume(String volume) {
-		this.volume = volume;
+	public void setVolume(String shipVolume) {
+		this.shipVolume = shipVolume;
 	}
 	
 		

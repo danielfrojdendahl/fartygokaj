@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import se.iths.Skeppokaj.domain.Machines;
 import se.iths.Skeppokaj.domain.Personnel;
+import se.iths.Skeppokaj.domain.Ships;
 //import org.iths.domain.Movie;
 //import org.iths.domain.Actor;
 import se.iths.Skeppokaj.main.Storage;
@@ -58,7 +59,7 @@ public class DBStorage implements Storage{
 				return true;
 
 			}catch(SQLException e){
-				System.out.println(e.toString());
+				System.out.println(e.getMessage());
 				System.out.println("Kan inte lägga till person " + firstName + " " + lastName +". Vänligen kontrollera insert statement!");
 			}
 			//Alerts.display("Wrong" ,"date format incorrect");
@@ -81,7 +82,7 @@ public class DBStorage implements Storage{
 				return true;
 
 			}catch(SQLException e){
-				System.out.println(e.toString());
+				System.out.println(e.getMessage());
 				System.out.println("Kunde inte ta bort person, "+p.getFirstName()+" "+p.getLastName());
 			}
 
@@ -103,7 +104,7 @@ public class DBStorage implements Storage{
 				return true;
 
 			}catch(SQLException e){
-				System.out.println(e.toString());
+				System.out.println(e.getMessage());
 				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName());
 			}
 		}
@@ -144,8 +145,8 @@ public class DBStorage implements Storage{
 				System.out.println(machineType + "är nu adderad till databasen.");
 			}
 
-			catch(SQLException ex){
-				System.out.println(ex);
+			catch(SQLException e){
+				System.out.println(e.getMessage());
 				System.out.println("Kan inte lägga till maskin" + " " + machineType +". Vänligen kontrollera insert statement");
 			}
 		}
@@ -165,7 +166,7 @@ public class DBStorage implements Storage{
 				System.out.println("Maskin borttagen");
 
 			}catch(SQLException e){
-				System.out.println(e.toString());
+				System.out.println(e.getMessage());
 				System.out.println("Kunde inte ta bort maskinen, "+m.getMachineType()+" "+m.getMachineStatus());
 			}
 
@@ -185,11 +186,34 @@ public class DBStorage implements Storage{
 				System.out.println("Trucken " +truckid+ " "+truckstatus+", Status uppdaterad");
 
 			}catch(SQLException e){
-				System.out.println(e.toString());
+				System.out.println(e.getMessage());
 				System.out.println("Kunde inte uppdatera truck, " +truckid+ " " +truckstatus);
 			}
 		}
 
+	}
+	
+	public boolean addShip(Ships s) {
+		if (hasConnection()) {
+			Statement stm = null;
+			String shipName = s.getShipName();
+			String shipCompany = s.getCompany();
+			String shipVolume = s.getVolume();
+			
+			try{
+				String sql = "INSERT INTO ships(S_id, S_name, S_company, S_volume) VALUES(" + shipName + "','" + shipCompany + "','" + shipVolume + "')";
+				stm = con.createStatement();
+				stm.executeUpdate(sql);
+				System.out.println(shipName + "är nu adderad till databasen.");
+				return true;
+			}
+			
+			catch(SQLException e){
+				System.out.println(e.getMessage());
+				System.out.println("Kan inte lägga till fartyg" + " " + shipVolume +". Vänligen kontrollera insert statement");
+			}
+		}
+		return false;
 	}
 }
 
