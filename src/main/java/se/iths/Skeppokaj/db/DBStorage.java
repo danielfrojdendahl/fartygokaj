@@ -35,25 +35,26 @@ public class DBStorage implements Storage{
 	}
 
 	//Method to add persons to the personnel db
-	public void addPersonnel(Personnel p){
+	public boolean addPersonnel(Personnel p){
 
 		if(hasConnection()){
 			//Preparation of data to put in db
 			Statement stm = null;
 			String firstName = p.getFirstName();
 			String lastName = p.getLastName();
-			int persId = p.getPersId();
+			//int persId = p.getPersId();
 			String driversLicence = p.getDriversLicence();
 			String status = p.getStatus();
 			String schemaType = p.getSchemaType();
 
 			try{
 				//SQL-statement to insert data in db
-				String sql = "INSERT INTO personal(p_id,Firstname,Lastname,License,Status,Schema) VALUES(" + persId + ",'" + firstName +
+				String sql = "INSERT INTO personal(Firstname,Lastname,License,Status,Schema) VALUES('" + firstName +
 						"','" + lastName + "','"+ driversLicence + "','" + status + "','" + schemaType + "')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println(firstName + " " + lastName +" adderad till databasen.");
+				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.toString());
@@ -61,9 +62,10 @@ public class DBStorage implements Storage{
 			}
 			//Alerts.display("Wrong" ,"date format incorrect");
 		}
+		return false;
 	}
 
-	public void deletePersonnel(Personnel p){
+	public boolean deletePersonnel(Personnel p){
 
 		if(hasConnection()){
 			Statement stm = null;
@@ -74,6 +76,7 @@ public class DBStorage implements Storage{
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Person borttagen");
+				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.toString());
@@ -81,9 +84,10 @@ public class DBStorage implements Storage{
 			}
 
 		}
+		return false;
 	}
 
-	public void updateStatusPersonnel(Personnel p) {
+	public boolean updateStatusPersonnel(Personnel p) {
 		if(hasConnection()){
 			Statement stm = null;
 			int persID = p.getPersId(); 
@@ -94,87 +98,31 @@ public class DBStorage implements Storage{
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Person "+ p.getFirstName()+" "+p.getLastName()+", status uppdaterad.");
-
+				return true;
+				
 			}catch(SQLException e){
 				System.out.println(e.toString());
 				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName());
 			}
 		}
+		return false;
 	}
 
-	// SQL way - Using strings  - it's more efficient to use IDs however ;-)
-	//  public List<Movie>getMoviesByActorName(String actorName){
-	//    List<Movie> movies = new ArrayList<>();
-	//    try{
-	//      String sql = "select title, name from movies "+
-	//        "natural join actors_movies natural join actors "+
-	//        "where actors.name = '" + actorName +"'";
-	//    
-	//      ResultSet rs = con.createStatement().executeQuery(sql);
-	//      while(rs.next()){
-	//        Movie m = new Movie.MovieBuilder()
-	//          .title(rs.getString("title"))
-	//          .build();
-	//        movies.add(m);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }      
-	//    return movies;
-	//  }
-	//  // SQL way - Using strings  - it's more efficient to use IDs however ;-)
-	//  public List<Actor>getActorsByMovieTitle(String title){
-	//    List<Actor> actors = new ArrayList<>();     
-	//    try{
-	//      con = DriverManager.getConnection("jdbc:sqlite:movies.db");
-	//      String sql = "select title, name from movies "+
-	//        "natural join actors_movies natural join actors "+
-	//        "where movies.title = '" + title +"'";
-	//    
-	//      ResultSet rs = con.createStatement().executeQuery(sql);
-	//      while(rs.next()){
-	//        Actor a = new Actor.ActorBuilder()
-	//          .name(rs.getString("name"))
-	//          .build();
-	//        actors.add(a);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }
-	//    return actors;
-	//  }
-	//  public List<Actor>getAllActors(){
-	//    List<Actor>allActors = new ArrayList<>();
-	//    try{
-	//      ResultSet rs=con.createStatement().executeQuery("select name from actors");
-	//      while(rs.next()){
-	//        Actor a = new Actor.ActorBuilder()
-	//          .name(rs.getString("name"))
-	//          .build();
-	//        allActors.add(a);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }
-	//    return allActors;
-	//  }
-	//  public List<Movie>getAllMovies(){
-	//    List<Movie> allMovies = new ArrayList<>();
-	//    try{
-	//      ResultSet rs=con.createStatement().executeQuery("select title from movies");
-	//      while(rs.next()){
-	//        Movie m = new Movie.MovieBuilder()
-	//          .title(rs.getString("title"))
-	//          .build();
-	//        allMovies.add(m);
-	//      }
-	//    }catch(SQLException e){
-	//      System.err.println("Error: " + e.getMessage());
-	//      e.printStackTrace();
-	//    }
-	//    return allMovies;
-	//  }
+	public List<Personnel> getPersonnelByID(int persID){
+		List<Personnel> personnel = new ArrayList<>();
+		try{
+			String sql = "SELECT * FROM personal WHERE p_id=" + persID;
+
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				Personnel p  = new Personnel(rs.getInt("p_id"),rs.getString("Firstname"),rs.getString("Lastname"),rs.getString("License"),rs.getString("Status"),rs.getString("Schema"));
+				personnel.add(p);
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}      
+		return personnel;
+	}
+
 }
