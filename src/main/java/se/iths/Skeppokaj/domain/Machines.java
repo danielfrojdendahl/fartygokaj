@@ -5,13 +5,15 @@ public class Machines {
 	private int machineID;
 	private String machineType;
 	private String machineStatus;
+	private int machineCost;
 	
 	
-	public Machines(int machineID, String machineType, String machineStatus) {
+	public Machines(int machineID, String machineType, String machineStatus, int machineCost) {
 		super();
 		this.machineID = machineID;
 		this.machineType = machineType;
 		this.machineStatus = machineStatus;
+		this.machineCost = machineCost;
 	}
 	
 	
@@ -50,6 +52,15 @@ public class Machines {
 		this.machineStatus = machineStatus;
 	}
 	
+	
+	public int getMachineCost() {
+		return machineCost;
+	}
+	
+	
+	public void setMachineCost(int machineCost) {
+		this.machineCost = machineCost;
+	}
 	
 	
 	@Override
