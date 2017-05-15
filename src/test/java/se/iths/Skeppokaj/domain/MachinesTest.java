@@ -11,7 +11,7 @@ public class MachinesTest {
 		
 	@Before	
 	public void defineMachines() {
-		test = new Machines(0, null, null);
+		test 	= new Machines(0, null, null);
 	}
 	
 	@Test
