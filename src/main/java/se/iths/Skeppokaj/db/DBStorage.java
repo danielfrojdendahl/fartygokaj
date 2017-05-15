@@ -100,6 +100,7 @@ public class DBStorage implements Storage{
 				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName());
 			}
 		}
+		}
 
 		public void addMachine(Machine m) {
 
@@ -128,7 +129,8 @@ public class DBStorage implements Storage{
 		public void deleteMachine(Machine m) {
 			if(hasConnection()){
 				Statement stm = null;
-				int machineID = m.getmachineID();
+				int machineType = m.getmachineType();
+				String machineStatus = m.machineStatus();
 				
 				try{
 					String sql = "DELETE FROM trucks WHERE p_id =" + machineType + machineStatus;
@@ -143,8 +145,24 @@ public class DBStorage implements Storage{
 
 			}
 			
-		
-
+		public void updateMachine(Machine m) {
+			 if (hasConnection()){
+			        
+			            
+			        try{
+			             Statement stm = null;
+			             int truckid = m.getmachineID();
+			             String truckstatus = m.getMachineStatus();
+			             String sql = "UPDATE trucks SET T_status='" +truckstatus+ "' WHERE T_id =" + truckid;
+			             stm = con.createStatement();
+			             stm.executeUpdate(sql);
+			             System.out.println("Trucken " + m.truckid()+ " "+m.truckstatus+", Status uppdaterad");
+			                
+			         }catch(SQLException e){
+			                System.out.println(e.toString());
+			                System.out.println("Kunde inte uppdatera truck, " +m.truckid()+ " " +m.truckstatus);
+			                }
+			    }
 
 			}
 		}
