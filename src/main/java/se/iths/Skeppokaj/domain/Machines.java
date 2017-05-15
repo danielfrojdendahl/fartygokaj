@@ -5,8 +5,10 @@ public class Machines {
 	private int machineID;
 	private String machineType;
 	private String machineStatus;
+	private int machineCost;
 	
 	
+<<<<<<< HEAD
 	public Machines(String machineType, String machineStatus) {
 		super();
 		this.machineType = machineType;
@@ -14,10 +16,14 @@ public class Machines {
 	}
 	
 	public Machines(int machineID, String machineType, String machineStatus) {
+=======
+	public Machines(int machineID, String machineType, String machineStatus, int machineCost) {
+>>>>>>> 0f00ed4028a33130b7b338e65bdf74163bd8bc3e
 		super();
 		this.machineID = machineID;
 		this.machineType = machineType;
 		this.machineStatus = machineStatus;
+		this.machineCost = machineCost;
 	}
 	
 	
@@ -51,7 +57,21 @@ public class Machines {
 		this.machineStatus = machineStatus;
 	}
 	
+<<<<<<< HEAD
 		
+=======
+	
+	public int getMachineCost() {
+		return machineCost;
+	}
+	
+	
+	public void setMachineCost(int machineCost) {
+		this.machineCost = machineCost;
+	}
+	
+	
+>>>>>>> 0f00ed4028a33130b7b338e65bdf74163bd8bc3e
 	@Override
 	public String toString(){
 		return new StringBuilder(machineType)  //how do we want a machine to be printed? just type?
