@@ -13,11 +13,14 @@ public interface Storage{
 	public boolean deletePersonnel(Personnel p);
 	public boolean updateStatusPersonnel(Personnel p);
 	public List<Personnel> getPersonnelByID(int persID);
-	public boolean addShip(Ships s);
+	
 	public boolean addMachine(Machines m);
 	public boolean deleteMachine(Machines m);
 	public boolean updateMachine(Machines m);
-	public List<Ships> getShipsByID(int shipID);
-	public boolean deleteShip(Ships s);
 	public List<Machines> getMachinesByID(int machineID);
+
+	public boolean addShip(Ships s);
+	public boolean deleteShip(Ships s);
+	public List<Ships> getShipsByID(int shipID);
+
 }

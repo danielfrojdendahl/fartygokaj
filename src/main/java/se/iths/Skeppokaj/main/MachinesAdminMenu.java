@@ -3,19 +3,20 @@ package se.iths.Skeppokaj.main;
 import java.util.List;
 
 import se.iths.Skeppokaj.db.DBStorage;
+import se.iths.Skeppokaj.domain.Machines;
 import se.iths.Skeppokaj.domain.Personnel;
 
-public class PersonnelAdminMenu{
+public class MachinesAdminMenu{
 	public void start(){
 		while(true){
 			Storage storage = new DBStorage();
 			String choice = "";
 			System.out.println("");
-			System.out.println("---PERSONALADMINISTRATION---");
+			System.out.println("---MASKINADMINISTRATION---");
 			System.out.println("");
-			System.out.println("1. Lägg till ny personal i databasen");
-			System.out.println("2. Ta bort personal ur databasen");
-			System.out.println("3. Uppdatera status för personal");
+			System.out.println("1. Lägg till ny maskin i databasen");
+			System.out.println("2. Ta bort maskin ur databasen");
+			System.out.println("3. Uppdatera status för maskin");
 			System.out.println("4. Tillbaka till huvudmeny");
 			while(!(choice.equals("1")||
 					choice.equals("2")||
@@ -25,31 +26,29 @@ public class PersonnelAdminMenu{
 			}
 			switch(choice){
 			case "1":
-				System.out.print("Lägg till personal");
-				String name = TextUtil.getReply("Förnamn: ");
-				String surName = TextUtil.getReply("Efternamn: ");
-				String driversLicence = TextUtil.getReply("Körkortstyp: ");
-				String status = TextUtil.getReply("Status: ");
-				String schemaType = TextUtil.getReply("Schematyp: ");
+				System.out.print("Lägg till maskin");
+				String machineType = TextUtil.getReply("Maskintyp: ");
+				String machineStatus = TextUtil.getReply("Status: ");
 
-				Personnel p = new Personnel(name,surName,driversLicence,status,schemaType);
-				if(storage.addPersonnel(p)){
+				Machines m = new Machines(machineType, machineStatus);
+				
+				if(storage.addMachine(m)){
 					System.out.println("Adderat ok");
 				}else{
 					System.out.println("Addering gick fel, kolla .err");
 				}
 				break;
 			case "2":
-				System.out.println("Ta bort personal");
-				int persID2 = getID();
-				List<Personnel> personnel2 = storage.getPersonnelByID(persID2);
-				if (personnel2.isEmpty()){
+				System.out.println("Ta bort maskin");
+				int machID2 = getID();
+				List<Machines> machines2 = storage.getMachinesByID(machID2);
+				if (machines2.isEmpty()){
 					System.out.println("Personen du söker finns ej i databasen.");
 					//break or ask again?
 				}else{
-					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
-					Personnel p2 = personnel2.get(0);
-					if(storage.deletePersonnel(p2)){
+					//Should we list all machines and have user select one? Searching the db by id should only generate one choice.
+					Machines m2 = machines2.get(0);
+					if(storage.deleteMachine(m2)){
 						System.out.println("Borttagning ok");
 					}else{
 						System.out.println("Borttagning fungerade ej, kolla .err");
@@ -57,16 +56,16 @@ public class PersonnelAdminMenu{
 				}
 				break;
 			case "3":
-				System.out.println("Uppdatera status för personal");
-				int persID3 = getID();
-				List<Personnel> personnel3 = storage.getPersonnelByID(persID3);
-				if (personnel3.isEmpty()){
-					System.out.println("Personen du söker finns ej i databasen.");
+				System.out.println("Uppdatera status för maskin");
+				int machID3 = getID();
+				List<Machines> machines3 = storage.getMachinesByID(machID3);
+				if (machines3.isEmpty()){
+					System.out.println("Maskinen du söker finns ej i databasen.");
 					//break or ask again?
 				}else{
-					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
-					Personnel p3 = personnel3.get(0);
-					if(storage.updateStatusPersonnel(p3)){
+					//Should we list all machines and have user select one? Searching the db by id should only generate one choice.
+					Machines m3 = machines3.get(0);
+					if(storage.updateMachine(m3)){
 						System.out.println("Status uppdaterad ok");
 					}else{
 						System.out.println("Kunde ej uppdatera status, kolla .err");

@@ -30,7 +30,8 @@ public class Main{
 				pam.start();
 				break;
 			case "2":
-				System.out.println("Ta bort personal");	
+				MachinesAdminMenu mam = new MachinesAdminMenu();
+				mam.start();
 				break;
 			case "3":
 				System.out.println("Ta bort personal");	
