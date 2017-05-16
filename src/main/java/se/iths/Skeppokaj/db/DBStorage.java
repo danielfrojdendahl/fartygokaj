@@ -220,5 +220,67 @@ public class DBStorage implements Storage{
 		}
 		return false;
 	}
+	
+	public List<Ships> getShipsByID(int shipID){
+		List<Ships> ships = new ArrayList<>();
+		try{
+			String sql = "SELECT * FROM ships WHERE S_id=" + shipID;
+
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				Ships s  = new Ships(rs.getInt("S_id"),rs.getString("S_name"),rs.getString("S_company"),rs.getString("S_volume"));
+				ships.add(s);
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}      
+		return ships;
+	}
+	
+	public boolean deleteShip(Ships s) {
+		if(hasConnection()){
+			Statement stm = null;
+			int shipID = s.getShipID();
+			
+
+			try{
+				String sql = "DELETE FROM ships WHERE S_id =" + shipID;
+				stm = con.createStatement();
+				stm.executeUpdate(sql);
+				System.out.println("Fartyg borttagen");
+				return true;
+
+			}catch(SQLException e){
+				System.out.println(e.getMessage());
+				System.out.println("Kunde inte ta bort fartyget, "+s.getShipName()+" "+s.getCompany()+" "+s.getVolume());
+			}
+
+		}
+		return false;
+	}
+	
+	public List<Machines> getMachineByID(int machineID){
+		List<Machines> machine = new ArrayList<>();
+		try{
+			String sql = "SELECT * FROM trucks WHERE T_id=" + machineID;
+
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				Machines m  = new Machines(rs.getInt("T_id"),rs.getString("T_type"),rs.getString("T_status"),rs.getInt("T_cost"));
+				machine.add(m);
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}      
+		return machine;
+	}
+
+	@Override
+	public List<Machines> getMachinesByID(int machineID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
