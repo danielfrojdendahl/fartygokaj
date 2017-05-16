@@ -135,11 +135,11 @@ public class DBStorage implements Storage{
 			Statement stm = null;
 			String machineType = m.getMachineType();
 			String machineStatus = m.getMachineStatus();
-			int machineCost = m.getMachineCost();
+			
 
 
 			try{
-				String sql = "INSERT INTO trucks(T_type,T_status,T_cost) VALUES(" + machineType + "','" + machineStatus + "','" + machineCost + "')";
+				String sql = "INSERT INTO trucks(T_type,T_status,T_cost) VALUES(" + machineType + "','" + machineStatus +"')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println(machineType + "är nu adderad till databasen.");
