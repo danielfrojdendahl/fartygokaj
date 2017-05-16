@@ -139,7 +139,7 @@ public class DBStorage implements Storage{
 
 
 			try{
-				String sql = "INSERT INTO trucks(T_type,T_status) VALUES(" + machineType + "','" + machineStatus + "')";
+				String sql = "INSERT INTO trucks(T_type,T_status) VALUES('" + machineType + "','" + machineStatus + "')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println(machineType + "är nu adderad till databasen.");
