@@ -114,7 +114,9 @@ public class DBStorage implements Storage{
 	public List<Personnel> getPersonnelByID(int persID){
 		List<Personnel> personnel = new ArrayList<>();
 		try{
-			String sql = "SELECT * FROM personal WHERE p_id=" + persID;
+			//String sql = "SELECT * FROM personal WHERE p_id=" + persID;
+			String sql = "SELECT p_id, Firstname, Lastname, License, Status, Schema, Hourly_salary FROM personal, employee_salary WHERE License=D_id AND p_id=" + persID;
+
 
 			ResultSet rs = con.createStatement().executeQuery(sql);
 			while(rs.next()){
@@ -162,7 +164,7 @@ public class DBStorage implements Storage{
 			
 
 			try{
-				String sql = "DELETE FROM trucks WHERE m_id =" + machineID;
+				String sql = "DELETE FROM trucks WHERE T_id =" + machineID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 				System.out.println("Maskin borttagen");
@@ -201,7 +203,7 @@ public class DBStorage implements Storage{
 	public List<Machines> getMachinesByID(int machineID){
 		List<Machines> machine = new ArrayList<>();
 		try{
-			String sql = "SELECT * FROM trucks WHERE T_id=" + machineID;
+			String sql = "SELECT T_id, T_type, T_status, T_cost FROM trucks,machine_cost WHERE T_type=mc_type AND T_id=" + machineID;
 
 			ResultSet rs = con.createStatement().executeQuery(sql);
 			while(rs.next()){

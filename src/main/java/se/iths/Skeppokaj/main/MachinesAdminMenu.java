@@ -43,7 +43,7 @@ public class MachinesAdminMenu{
 				int machID2 = getID();
 				List<Machines> machines2 = storage.getMachinesByID(machID2);
 				if (machines2.isEmpty()){
-					System.out.println("Personen du söker finns ej i databasen.");
+					System.out.println("Maskinen du söker finns ej i databasen.");
 					//break or ask again?
 				}else{
 					//Should we list all machines and have user select one? Searching the db by id should only generate one choice.
