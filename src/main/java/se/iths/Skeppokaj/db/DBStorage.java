@@ -55,7 +55,9 @@ public class DBStorage implements Storage{
 						"','" + lastName + "','"+ driversLicence + "','" + status + "','" + schemaType + "')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println(firstName + " " + lastName +" adderad till databasen.");
+				String sqlID = "SELECT max(p_id) FROM personal";
+				ResultSet rs = con.createStatement().executeQuery(sqlID);
+				System.out.println(firstName + " " + lastName +" " + rs.getInt(1) + " adderad till databasen.");
 				return true;
 
 			}catch(SQLException e){

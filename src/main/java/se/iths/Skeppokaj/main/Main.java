@@ -9,6 +9,7 @@ public class Main{
 		while(true){
 			Storage storage = new DBStorage();
 			String choice = "";
+			drawShip();
 			System.out.println("");
 			System.out.println("---HUVUDMENY SKEPPOKAJ 1.0---");
 			System.out.println("");
@@ -46,5 +47,21 @@ public class Main{
 		}
 	}
 
-	
+	private static void drawShip() {
+		System.out.println("        /\\/\\");
+		System.out.println("");
+		System.out.println("                        /\\/\\");
+		System.out.println("        O  O  O");
+		System.out.println("         O  O  O");
+		System.out.println("                 O");
+		System.out.println("                __|__");
+		System.out.println("                || ||_____");
+		System.out.println("                || ||    |");
+		System.out.println("     --------------------------");
+		System.out.println("      \\   O   O   O   O      /");
+		System.out.println(" ~ ~ ~ ~ ~ ~ ~ ~  ~ ~ ~ ~ ~ ~ ~ ~");
+		System.out.println("  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");		
+	}
+
+
 }

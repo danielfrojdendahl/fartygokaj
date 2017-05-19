@@ -25,7 +25,7 @@ public class PersonnelAdminMenu{
 			}
 			switch(choice){
 			case "1":
-				System.out.print("Lägg till personal");
+				System.out.println("Lägg till personal");
 				String name = TextUtil.getReply("Förnamn: ");
 				String surName = TextUtil.getReply("Efternamn: ");
 				String driversLicence = TextUtil.getReply("Körkortstyp: ");
@@ -65,7 +65,9 @@ public class PersonnelAdminMenu{
 					//break or ask again?
 				}else{
 					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
+					String status3 = TextUtil.getReply("Status: ");
 					Personnel p3 = personnel3.get(0);
+					p3.setStatus(status3);
 					if(storage.updateStatusPersonnel(p3)){
 						System.out.println("Status uppdaterad ok");
 					}else{
