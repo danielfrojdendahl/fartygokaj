@@ -22,5 +22,6 @@ public interface Storage{
 	public boolean addShip(Ships s);
 	public boolean deleteShip(Ships s);
 	public List<Ships> getShipsByID(int shipID);
+	public List<Ships> getAllShips();
 
 }

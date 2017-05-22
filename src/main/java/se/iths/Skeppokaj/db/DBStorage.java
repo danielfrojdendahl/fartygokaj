@@ -280,6 +280,24 @@ public class DBStorage implements Storage{
 		}      
 		return ships;
 	}
+
+	@Override
+	public List<Ships> getAllShips() {
+		List<Ships> ships = new ArrayList<>();
+		try{
+			String sql = "SELECT * FROM ships";
+
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				Ships s  = new Ships(rs.getInt("S_id"),rs.getString("S_name"),rs.getString("S_company"),rs.getString("S_volume"));
+				ships.add(s);
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}      
+		return ships;
+	}
 	
 	
 }

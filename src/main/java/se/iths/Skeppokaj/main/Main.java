@@ -35,7 +35,8 @@ public class Main{
 				mam.start();
 				break;
 			case "3":
-				System.out.println("Ta bort personal");	
+				HarbourAdminMenu ham = new HarbourAdminMenu();
+				ham.start();
 				break;
 			case "4":
 				System.out.println("Ta bort personal");	
