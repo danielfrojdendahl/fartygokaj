@@ -65,6 +65,8 @@ public class MachinesAdminMenu{
 				}else{
 					//Should we list all machines and have user select one? Searching the db by id should only generate one choice.
 					Machines m3 = machines3.get(0);
+					String machineStatus3 = TextUtil.getReply("Status: ");
+					m3.setMachineStatus(machineStatus3);
 					if(storage.updateStatusMachine(m3)){
 						System.out.println("Status uppdaterad ok");
 					}else{
