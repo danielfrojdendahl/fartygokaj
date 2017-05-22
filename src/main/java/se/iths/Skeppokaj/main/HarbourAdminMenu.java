@@ -117,7 +117,7 @@ public class HarbourAdminMenu{
 	}
 	
 	private boolean checkDayInCalendar(int day) {
-		// TODO Auto-generated method stub
+		// Is day in the free calendar?
 		return false;
 	}
 
