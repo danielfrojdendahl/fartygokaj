@@ -28,8 +28,8 @@ public class PersonnelAdminMenu{
 				System.out.println("Lägg till personal");
 				String name = TextUtil.getReply("Förnamn: ");
 				String surName = TextUtil.getReply("Efternamn: ");
-				String driversLicence = TextUtil.getReply("Körkortstyp: ");
-				String status = TextUtil.getReply("Status: ");
+				String driversLicence = HelpUtil.validDriversLicense();
+				String status = HelpUtil.validPersonalStatus();
 				String schemaType = TextUtil.getReply("Schematyp: ");
 
 				Personnel p = new Personnel(name,surName,driversLicence,status,schemaType);

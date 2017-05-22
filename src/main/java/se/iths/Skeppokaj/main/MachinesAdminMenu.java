@@ -27,7 +27,7 @@ public class MachinesAdminMenu{
 			switch(choice){
 			case "1":
 				System.out.print("Lägg till maskin");
-				String machineType = TextUtil.getReply("Maskintyp: ");
+				String machineType = HelpUtil.validMachineType();
 				String machineStatus = TextUtil.getReply("Status: ");
 
 				Machines m = new Machines(machineType, machineStatus);
