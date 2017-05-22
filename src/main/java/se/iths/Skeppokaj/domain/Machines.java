@@ -17,10 +17,10 @@ public class Machines {
 	
 	public Machines(int machineID, String machineType, String machineStatus, int machineCost) {
 		super();
+		this.machineCost	= machineCost;
 		this.machineID 		= machineID;
 		this.machineType 	= machineType;
 		this.machineStatus 	= machineStatus;
-		this.machineCost	= machineCost;
 	}
 		
 	

@@ -16,7 +16,7 @@ public interface Storage{
 	
 	public boolean addMachine(Machines m);
 	public boolean deleteMachine(Machines m);
-	public boolean updateMachine(Machines m);
+	public boolean updateStatusMachine(Machines m);
 	public List<Machines> getMachinesByID(int machineID);
 
 	public boolean addShip(Ships s);

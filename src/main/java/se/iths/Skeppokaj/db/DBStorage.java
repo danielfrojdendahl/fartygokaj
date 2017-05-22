@@ -181,7 +181,7 @@ public class DBStorage implements Storage{
 		return false;
 	}
 
-	public boolean updateMachine(Machines m) {
+	public boolean updateStatusMachine(Machines m) {
 		if (hasConnection()){
 			Statement stm = null;
 			int truckid = m.getMachineID();
