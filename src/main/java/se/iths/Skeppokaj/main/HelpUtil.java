@@ -11,7 +11,6 @@ public class HelpUtil {
 	final static List<String> statusType = Arrays.asList("100%", "50%", "0%", "Sjuk", "VAB", "Studier", "Semester");
 	final static List<String> schemaType = Arrays.asList("MF", "L", "S");
 	final static List<String> volumeType = Arrays.asList("A001", "AA01", "B001", "BB01", "C001", "CC01", "CCC1", "K001");
-	private static String name;
 	
 ;	
 	public static String validMachineType() {
@@ -45,9 +44,9 @@ public class HelpUtil {
 	    String validatedDriversLicense = "";
 	    boolean notInList = true;
 	    while (notInList) {
-	        System.out.println("Valid Licenses are as following: ");
+	        System.out.println("Godkända körtkortstyper är: ");
 	        System.out.println("A, AA, B, BB, C, CC, CCC, K");
-	        validatedDriversLicense = TextUtil.getReply("DriversLicenses: ");
+	        validatedDriversLicense = TextUtil.getReply("Körkortstyp: ");
 	        if (driversLicenseType.contains(validatedDriversLicense)) {
 	            notInList = false;
 	        }
@@ -59,7 +58,7 @@ public class HelpUtil {
 	    String validatedPersonalStatus = "";
 	    boolean notInList = true;
 	    while (notInList) {
-	        System.out.println("Valid Status for employees are as following: ");
+	        System.out.println("Godkänd status för personal är: ");
 	        System.out.println("100%, 50%, 0%, Sjuk, VAB, Studier, Semester");
 	        validatedPersonalStatus = TextUtil.getReply("Status: ");
 	        if (statusType.contains(validatedPersonalStatus)) {
@@ -83,9 +82,10 @@ public class HelpUtil {
 	    return validatedSchemaType;
 	}
 	
+	
 	public static String validName() {
-		String validatedName = TextUtil.getReply("Namn: ");
-		while (validatedName.matches(".*\\d.*")) {
+		String validatedName = TextUtil.getReply("Namn: ");    //method with a scanner
+		while (validatedName.matches(".*\\d.*")) { 		       //check if contains digigts
 				System.out.println("Namn kan inte innehålla siffror!");
 				validatedName = TextUtil.getReply("Namn: ");
 		}
