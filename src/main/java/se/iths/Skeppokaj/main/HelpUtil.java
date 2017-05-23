@@ -7,15 +7,16 @@ import java.util.List;
 public class HelpUtil {
 	
 	final static List<String> machineTypes = Arrays.asList("A001", "AA01", "B001", "BB01", "C001", "CC01", "CCC1", "K001" );
-	final static List<String> driversLicenseType = Arrays.asList("A", "AA", "B", "BB", "C0", "CC", "CCC", "K" );
+	final static List<String> driversLicenseType = Arrays.asList("A", "AA", "B", "BB", "C", "CC", "CCC", "K" );
 	final static List<String> statusType = Arrays.asList("100%", "50%", "0%", "Sjuk", "VAB", "Studier", "Semester");
 	final static List<String> schemaType = Arrays.asList("MF", "L", "S");
+	final static List<String> volumeType = Arrays.asList("A001", "AA01", "B001", "BB01", "C001", "CC01", "CCC1", "K001");
 	
 	public static String validMachineType() {
 		String validatedMachineType = "";
 		boolean notInList = true;
 		while (notInList) {
-			System.out.println("A001, AA01, B001, BB01, C001, CC01, CCC1");
+			System.out.println("A001, AA01, B001, BB01, C001, CC01, CCC1, K001");
 			System.out.print("\nVälj en maskintyp ovan: ");
 			validatedMachineType = TextUtil.getReply("Maskintyp: ");
 			if (machineTypes.contains(validatedMachineType)) {
@@ -23,6 +24,19 @@ public class HelpUtil {
 			}
 		}
 		return validatedMachineType;
+	}
+	
+	public static String validVolumeType() {
+		String validatedVolumeType = "";
+		boolean notInList = true;
+		while (notInList) {
+			System.out.println("Tillåtna volymtyper för skepp är: ");
+			System.out.println("A001, AA01, B001, BB01, C001, CC01, CCC1, K001");
+			if (volumeType.contains(validatedVolumeType)) {
+				notInList = false;
+			}
+		}
+		return validatedVolumeType;
 	}
 	
 	public static String validDriversLicense() {
