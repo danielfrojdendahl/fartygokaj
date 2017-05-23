@@ -9,6 +9,7 @@ public class HelpUtil {
 	final static List<String> machineTypes = Arrays.asList("A001", "AA01", "B001", "BB01", "C001", "CC01", "CCC1", "K001" );
 	final static List<String> driversLicenseType = Arrays.asList("A", "AA", "B", "BB", "C0", "CC", "CCC", "K" );
 	final static List<String> statusType = Arrays.asList("100%", "50%", "0%", "Sjuk", "VAB", "Studier", "Semester");
+	final static List<String> schemaType = Arrays.asList("MF", "L", "S");
 	
 	public static String validMachineType() {
 		String validatedMachineType = "";
@@ -52,6 +53,18 @@ public class HelpUtil {
 	    return validatedPersonalStatus;
 	}
 
-	
+	public static String validSchemaType() {
+	    String validatedSchemaType = "";
+	    boolean notInList = true;
+	    while (notInList) {
+	        System.out.println("Tillåtna scheman är: ");
+	        System.out.println("MF, L, S");
+	        validatedSchemaType = TextUtil.getReply("Schema: ");
+	        if (schemaType.contains(validatedSchemaType)) {
+	            notInList = false;
+	        }
+	    }
+	    return validatedSchemaType;
+	}
 	
 }

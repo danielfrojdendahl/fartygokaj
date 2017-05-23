@@ -30,7 +30,7 @@ public class PersonnelAdminMenu{
 				String surName = TextUtil.getReply("Efternamn: ");
 				String driversLicence = HelpUtil.validDriversLicense();
 				String status = HelpUtil.validPersonalStatus();
-				String schemaType = TextUtil.getReply("Schematyp: ");
+				String schemaType = HelpUtil.validSchemaType();
 
 				Personnel p = new Personnel(name,surName,driversLicence,status,schemaType);
 				if(storage.addPersonnel(p)){
