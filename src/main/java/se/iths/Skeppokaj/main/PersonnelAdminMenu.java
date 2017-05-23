@@ -26,7 +26,7 @@ public class PersonnelAdminMenu{
 			switch(choice){
 			case "1":
 				System.out.println("Lägg till personal");
-				String name = TextUtil.getReply("Förnamn: ");
+				String name = HelpUtil.validName();
 				String surName = TextUtil.getReply("Efternamn: ");
 				String driversLicence = HelpUtil.validDriversLicense();
 				String status = HelpUtil.validPersonalStatus();

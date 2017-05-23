@@ -11,7 +11,9 @@ public class HelpUtil {
 	final static List<String> statusType = Arrays.asList("100%", "50%", "0%", "Sjuk", "VAB", "Studier", "Semester");
 	final static List<String> schemaType = Arrays.asList("MF", "L", "S");
 	final static List<String> volumeType = Arrays.asList("A001", "AA01", "B001", "BB01", "C001", "CC01", "CCC1", "K001");
+	private static String name;
 	
+;	
 	public static String validMachineType() {
 		String validatedMachineType = "";
 		boolean notInList = true;
@@ -81,8 +83,13 @@ public class HelpUtil {
 	    return validatedSchemaType;
 	}
 	
-	public static String (validname() {
-		
+	public static String validName() {
+		String validatedName = TextUtil.getReply("Namn: ");
+		while (validatedName.matches(".*\\d.*")) {
+				System.out.println("Namn kan inte innehålla siffror!");
+				validatedName = TextUtil.getReply("Namn: ");
+		}
+		return validatedName;
 	}
 	
 }
