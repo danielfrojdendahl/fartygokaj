@@ -67,4 +67,8 @@ public class HelpUtil {
 	    return validatedSchemaType;
 	}
 	
+	public static String (validname() {
+		
+	}
+	
 }
