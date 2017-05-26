@@ -84,19 +84,42 @@ public class HelpUtil {
 
 
 	public static String validName() {
-		boolean notValidName = true;
-		boolean isEmpty = true;
-		String validatedName = "";    				
-		while (notValidName == true || isEmpty == true) { 		       			
-			validatedName = TextUtil.getReply("Förnamn: ");					
-			notValidName = validatedName.matches(".*\\d.*");				
-			isEmpty = validatedName.isEmpty();
-			if (notValidName == true || isEmpty == true) {
-				System.out.println("Namn kan inte lämnas tomt eller innehålla siffror!");
+		boolean notValidName 	= true;
+		boolean isEmpty 		= true;
+		boolean onlyWhiteSpace 	= true;
+		String validatedName 	= ""; 
+		
+		while (notValidName == true || isEmpty == true || onlyWhiteSpace == true) { 		       			
+			validatedName 		= TextUtil.getReply("Förnamn: ");					
+			notValidName 		= validatedName.matches(".*\\d.*");
+			onlyWhiteSpace 		= !validatedName.matches(".*\\w.*");
+			isEmpty 			= validatedName.isEmpty();
+			if (notValidName == true || isEmpty == true || onlyWhiteSpace == true) {
+				System.out.println("Förnamn kan inte lämnas tomt eller innehålla siffror!");
 			}
-			
+
 		}
 		validatedName = validatedName.trim();
 		return validatedName;
+	}
+
+	public static String validSurName() {
+		boolean notValidSurName 	= true;
+		boolean isEmpty 			= true;
+		boolean onlyWhiteSpace 		= true;
+		String validatedSurName 	= "";
+		
+		while (notValidSurName == true || isEmpty == true || onlyWhiteSpace == true) { 		       			
+			validatedSurName 	= TextUtil.getReply("Efternamn: ");					
+			notValidSurName 	= validatedSurName.matches(".*\\d.*");
+			onlyWhiteSpace 		= !validatedSurName.matches(".*\\w.*");
+			isEmpty 			= validatedSurName.isEmpty();
+			if (notValidSurName == true || isEmpty == true || onlyWhiteSpace == true) {
+				System.out.println("Efternamn kan inte lämnas tomt eller innehålla siffror!");
+			}
+
+		}
+		validatedSurName = validatedSurName.trim();
+		return validatedSurName;
 	}
 }

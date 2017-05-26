@@ -28,7 +28,7 @@ public class PersonnelAdminMenu{
 				System.out.println("Lägg till personal");
 				String name = HelpUtil.validName();
 				System.out.println(name);
-				String surName = HelpUtil.validName();
+				String surName = HelpUtil.validSurName();
 				System.out.println(surName);
 				String driversLicence = HelpUtil.validDriversLicense();
 				String status = HelpUtil.validPersonalStatus();
