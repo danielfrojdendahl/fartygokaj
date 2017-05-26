@@ -6,6 +6,7 @@ import se.iths.Skeppokaj.db.DBStorage;
 import se.iths.Skeppokaj.domain.Personnel;
 public class Main{
 	public static void main(String[] args){
+		System.out.println("thisi s a test");
 		while(true){
 			Storage storage = new DBStorage();
 			String choice = "";
