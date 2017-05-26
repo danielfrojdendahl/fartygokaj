@@ -2,7 +2,11 @@ package se.iths.Skeppokaj.login;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 
+ * @author Mikaela
+ *
+ */
 public class LoginManager {
 
 	private LoginModel loginModel;  
