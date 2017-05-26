@@ -85,15 +85,18 @@ public class HelpUtil {
 
 	public static String validName() {
 		boolean notValidName = true;
+		boolean isEmpty = true;
 		String validatedName = "";    				
-		while (notValidName) { 		       			
-			validatedName = TextUtil.getReply("Namn: ");
-			notValidName = validatedName.matches(".*\\d.*");
-			if (notValidName == true) {
-				System.out.println("Namn kan inte innehålla siffror!");
+		while (notValidName == true || isEmpty == true) { 		       			
+			validatedName = TextUtil.getReply("Förnamn: ");					
+			notValidName = validatedName.matches(".*\\d.*");				
+			isEmpty = validatedName.isEmpty();
+			if (notValidName == true || isEmpty == true) {
+				System.out.println("Namn kan inte lämnas tomt eller innehålla siffror!");
 			}
+			
 		}
+		validatedName = validatedName.trim();
 		return validatedName;
 	}
-
 }
