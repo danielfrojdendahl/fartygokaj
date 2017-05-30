@@ -1131,6 +1131,6 @@ INSERT INTO "kajvol" VALUES(2, "C005", 5);
 INSERT INTO "kajvol" VALUES(3, "C007", 7);
 INSERT INTO "kajvol" VALUES(3, "CCC5", 5);
 INSERT INTO "kajvol" VALUES(3, "K007", 7);
-CREATE TABLE "kajcalendar" (kaj_id integer not null, kaj_date integer unique not null, kaj_slot1 integer unique not null, kaj_slot2 integer unique not null, kaj_slot3 integer unique not null);
-CREATE TABLE "booked" (booked_id integer not null, pers_id integer unique not null, ship_id integer not null, truck_id integer unique not null); 
+CREATE TABLE "kajcalendar" (kaj_id integer not null, kaj_date integer not null, kaj_slot1 integer unique not null, kaj_slot2 integer unique not null, kaj_slot3 integer unique not null);
+CREATE TABLE "booked" (booked_id integer not null, pers_id integer not null, ship_id integer not null, truck_id integer not null); 
 COMMIT;
