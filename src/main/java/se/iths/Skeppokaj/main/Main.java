@@ -4,8 +4,22 @@ import java.util.List;
 
 import se.iths.Skeppokaj.db.DBStorage;
 import se.iths.Skeppokaj.domain.Personnel;
+import se.iths.Skeppokaj.login.LoginManager;
 public class Main{
 	public static void main(String[] args){
+		
+		//Login
+		boolean loginFalse = true;
+		while(loginFalse){
+			String userName = TextUtil.getReply("Användarnamn: ");
+			String pwd = TextUtil.getReply("Lösenord: ");
+			LoginManager lm = new LoginManager(userName, pwd);
+			loginFalse = !lm.validate();
+			if(loginFalse){
+				System.out.println("Fel användarnamn eller lösenord, försök igen!");
+			}
+		}
+		
 		while(true){
 			Storage storage = new DBStorage();
 			String choice = "";
