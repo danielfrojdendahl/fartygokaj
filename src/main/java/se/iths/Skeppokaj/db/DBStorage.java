@@ -71,21 +71,20 @@ public class DBStorage implements Storage{
 	}
 
 	public boolean deletePersonnel(Personnel p){
-
 		if(hasConnection()){
 			Statement stm = null;
-			int persID = p.getPersId(); 
-
+			int persID = p.getPersId();
+			
 			try{
 				String sql = "DELETE FROM personal WHERE p_id =" + persID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println("Person borttagen");
+				System.out.println("Person borttagen : " + p.getFirstName() + " " + p.getLastName() + " PersId: " + p.getPersId());
 				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.getMessage());
-				System.out.println("Kunde inte ta bort person, "+p.getFirstName()+" "+p.getLastName());
+				System.out.println("Kunde inte ta bort person, " + p.getFirstName() + " " + p.getLastName() + " PersId: " + p.getPersId());
 			}
 
 		}
@@ -102,7 +101,7 @@ public class DBStorage implements Storage{
 				String sql = "UPDATE personal SET Status='"+status+"' WHERE p_id =" + persID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println("Person "+ p.getFirstName()+" "+p.getLastName()+", status uppdaterad.");
+				System.out.println("Person "+ p.getFirstName()+" "+p.getLastName()+ ", status uppdaterad.");
 				return true;
 
 			}catch(SQLException e){
@@ -134,13 +133,10 @@ public class DBStorage implements Storage{
 
 
 	public boolean addMachine(Machines m) {
-
 		if(hasConnection()){
 			Statement stm = null;
 			String machineType = m.getMachineType();
 			String machineStatus = m.getMachineStatus();
-			
-
 
 			try{
 				String sql = "INSERT INTO trucks(T_type,T_status) VALUES('" + machineType + "','" + machineStatus + "')";
@@ -164,7 +160,6 @@ public class DBStorage implements Storage{
 			Statement stm = null;
 			int machineID = m.getMachineID();
 			
-
 			try{
 				String sql = "DELETE FROM trucks WHERE T_id =" + machineID;
 				stm = con.createStatement();
