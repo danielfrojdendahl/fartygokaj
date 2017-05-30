@@ -11,7 +11,15 @@ public class Main{
 		//Login
 		boolean loginFalse = true;
 		while(loginFalse){
-			String userName = TextUtil.getReply("Användarnamn: ");
+			boolean emptyUsername = true;
+			String userName = "";
+			while (emptyUsername) {
+				userName = TextUtil.getReply("Användarnamn: ");
+				emptyUsername = userName.isEmpty();
+				if (emptyUsername) {
+					System.out.println("Vänligen ange ett registrerat användarnamn!");
+				}
+			}
 			String pwd = TextUtil.getReply("Lösenord: ");
 			LoginManager lm = new LoginManager(userName, pwd);
 			loginFalse = !lm.validate();

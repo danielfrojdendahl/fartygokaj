@@ -10,7 +10,7 @@ public class HelpUtil {
 	final static List<String> driversLicenseType = Arrays.asList("A", "AA", "B", "BB", "C", "CC", "CCC", "K" );
 	final static List<String> statusType = Arrays.asList("100%", "50%", "0%", "Sjuk", "VAB", "Studier", "Semester");
 	final static List<String> schemaType = Arrays.asList("MF", "L", "S");
-	final static List<String> volumeType = Arrays.asList("A001", "AA01", "B001", "BB01", "C001", "CC01", "CCC1", "K001");
+	final static List<String> volumeType = Arrays.asList("A005", "AA07", "B005", "BB07", "C005", "CC07", "CCC5", "K007");
 
 	;	
 	public static String validMachineType() {
@@ -32,7 +32,7 @@ public class HelpUtil {
 		boolean notInList = true;
 		while (notInList) {
 			System.out.println("Tillåtna volymtyper för skepp är: ");
-			System.out.println("A001, AA01, B001, BB01, C001, CC01, CCC1, K001");
+			System.out.println("A005, AA07, B005, BB07, C005, CC07, CCC5, K007");
 			if (volumeType.contains(validatedVolumeType)) {
 				notInList = false;
 			}
