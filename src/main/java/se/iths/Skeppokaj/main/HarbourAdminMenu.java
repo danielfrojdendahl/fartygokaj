@@ -27,7 +27,7 @@ public class HarbourAdminMenu{
 
 				if (ships.isEmpty()){
 					System.out.println("Fartygsdatabasen är tom. Det finns inga fartyg i kö. Ta en kaffepaus!");
-					//break bc only one input (id) and user may want to list all ships again
+					//break
 				}else{
 					//List all ships
 					System.out.println("FartygsID     Namn      Företag");
@@ -62,7 +62,12 @@ public class HarbourAdminMenu{
 
 
 	private void showSchema(Ships ship) {
-		// List schema for appropriate harbour
+		// TODO List schema for appropriate harbour
+		/*get ship volume
+		 * get appropriate harbour&no workers/machines from kajvol
+		 * select harbour&date from kaj_calendar where a timeslot is free
+		 * 
+		 */
 
 	}
 
@@ -78,7 +83,7 @@ public class HarbourAdminMenu{
 		switch(choice){
 		case "1":
 			int i = getDay();
-			//check answer is a number and a number in free days
+			//TODO check answer is a number and a number in free days
 			//Show timeslots for day
 			showTimeSlots(i);
 			showMenu3();
@@ -117,14 +122,14 @@ public class HarbourAdminMenu{
 	}
 	
 	private boolean checkDayInCalendar(int day) {
-		// Is day in the free calendar?
+		//TODO Is day in the free calendar?
 		return false;
 	}
 
 
 
 	private void showTimeSlots(int day) {
-		// List timeslots for chosen day
+		//TODO List timeslots for chosen day
 
 	}
 
@@ -140,8 +145,8 @@ public class HarbourAdminMenu{
 		switch(choice){
 		case "1":
 			TextUtil.getReply("Timeslot: ");
-			//Try to book ship at timeslot
-			//OK?
+			//TODO Try to book ship at timeslot
+			//TODO OK?
 			break;
 		case "2":
 			System.out.println("Tillbaka till kalender");
