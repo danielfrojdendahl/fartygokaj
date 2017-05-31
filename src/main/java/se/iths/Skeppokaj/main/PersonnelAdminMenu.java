@@ -84,8 +84,9 @@ public class PersonnelAdminMenu{
 					//break or ask again?
 				}else{
 					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
-					String status3 = TextUtil.getReply("Status: ");
 					Personnel p3 = personnel3.get(0);
+					System.out.println("Anställd med ID " + p3.getPersId() + ": " + p3.getFirstName() + " " + p3.getLastName() + ", Status: " + p3.getStatus());
+					String status3 = TextUtil.getReply("Status: ");
 					p3.setStatus(status3);
 					if(storage.updateStatusPersonnel(p3)){
 						System.out.println("Status uppdaterad ok");
