@@ -101,12 +101,12 @@ public class DBStorage implements Storage{
 				String sql = "UPDATE personal SET Status='"+status+"' WHERE p_id =" + persID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println("Person "+ p.getFirstName()+" "+p.getLastName()+ ", status uppdaterad.");
+				System.out.println("Person "+ p.getFirstName()+" "+p.getLastName()+ p.getPersId() +  ", status uppdaterad.");
 				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.getMessage());
-				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName());
+				System.out.println("Kunde inte uppdatera person, "+p.getFirstName()+" "+p.getLastName() +  "PersId: " + p.getPersId());
 			}
 		}
 		return false;
@@ -137,12 +137,13 @@ public class DBStorage implements Storage{
 			Statement stm = null;
 			String machineType = m.getMachineType();
 			String machineStatus = m.getMachineStatus();
-
 			try{
 				String sql = "INSERT INTO trucks(T_type,T_status) VALUES('" + machineType + "','" + machineStatus + "')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println(machineType + "är nu adderad till databasen.");
+				String sqlID = "SELECT max(t_id) FROM trucks";
+				ResultSet rs = con.createStatement().executeQuery(sqlID);
+				System.out.println("Maskin ID: "+ rs.getInt(1) + " " + machineType + " är nu adderad till databasen.");
 				return true;
 			}
 
@@ -164,12 +165,12 @@ public class DBStorage implements Storage{
 				String sql = "DELETE FROM trucks WHERE T_id =" + machineID;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println("Maskin borttagen");
+				System.out.println("Maskin borttagen: " + machineID);
 				return true;
 
 			}catch(SQLException e){
 				System.out.println(e.getMessage());
-				System.out.println("Kunde inte ta bort maskinen, "+m.getMachineType()+" "+m.getMachineStatus());
+				System.out.println("Kunde inte ta bort maskinen, "+machineID+" "+m.getMachineStatus());
 			}
 
 		}
@@ -186,7 +187,7 @@ public class DBStorage implements Storage{
 				String sql = "UPDATE trucks SET T_status='" +truckstatus+ "' WHERE T_id =" + truckid;
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println("Trucken " +truckid+ " "+truckstatus+", Status uppdaterad");
+				System.out.println("Trucken " +truckid+ " Med Status "+truckstatus+", uppdaterad");
 				return true;
 
 			}catch(SQLException e){
