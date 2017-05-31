@@ -5,4 +5,4 @@
 .project
 
 # Ignore Mavens target folder
-#target/
+target/
