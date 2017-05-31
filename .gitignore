@@ -1,4 +1,4 @@
-## Ignore .settings folder of Eclipse
+# Ignore .settings folder of Eclipse
 .settings/
 
 # Ignore .project file of Eclipse
@@ -6,3 +6,6 @@
 
 # Ignore Mavens target folder
 target/
+
+#Ignore .db-file
+skeppokaj.db
