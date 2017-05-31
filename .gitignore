@@ -1,4 +1,4 @@
-# Ignore .settings folder of Eclipse
+## Ignore .settings folder of Eclipse
 .settings/
 
 # Ignore .project file of Eclipse

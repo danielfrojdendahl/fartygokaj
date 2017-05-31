@@ -49,13 +49,30 @@ public class PersonnelAdminMenu{
 					System.out.println("Personen du söker finns ej i databasen.");
 					//break or ask again?
 				}else{
-					//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
-					Personnel p2 = personnel2.get(0);
-					if(storage.deletePersonnel(p2)){
-						System.out.println("Borttagning ok");
-					}else{
-						System.out.println("Borttagning fungerade ej, kolla .err");
+					// 1. Skapa en metod för prompt
+					// 2. Läsa värdet från input och omvandla till en bool.
+					if (writePrompt(persID2)) {
+						boolean doDelete = askDelete();
+						
+						if (doDelete) {
+							//Should we list all personnel and have user select one? Searching the db by id should only generate one choice.
+							Personnel p2 = personnel2.get(0);
+							if(storage.deletePersonnel(p2)){
+								System.out.println("Borttagning ok");
+							}else{
+								System.out.println("Borttagning fungerade ej, kolla .err");
+							}
+						}
+						else {
+							break;
+						}
+						
 					}
+					else{
+						break;
+					}
+					
+					
 				}
 				break;
 			case "3":
@@ -97,4 +114,43 @@ public class PersonnelAdminMenu{
 		}		
 		return persID;
 	}
+	
+	private static boolean writePrompt(int id) {
+		
+		Storage storage = new DBStorage();
+		List<Personnel> p = storage.getPersonnelByID(id);
+		
+		if (p.size() == 1 ) {
+			Personnel pers = p.get(0);
+			
+			System.out.println("Vill du ta bort följande person: " + pers.getFirstName() + " " + pers.getLastName() + " med ID: " + id + "?");
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	private static boolean askDelete() {
+		
+		
+		boolean keepLooping = true;
+		while (keepLooping) {
+			String reply = TextUtil.getReply("För att ta bort personen skriv JA om inte skriv NEJ: ");
+			
+			if (reply.equals("JA") || reply.equals("ja")) {
+				return true;
+				
+			}
+			else if (reply.equals("NEJ") || reply.equals("nej")) {
+				return false;
+				
+			}
+			
+		}
+		
+		return false;
+	}
 }
+
