@@ -1,6 +1,7 @@
 package se.iths.Skeppokaj.main;
 import java.util.List;
 
+import se.iths.Skeppokaj.domain.Day;
 import se.iths.Skeppokaj.domain.Machines;
 import se.iths.Skeppokaj.domain.Personnel;
 import se.iths.Skeppokaj.domain.Ships;
@@ -23,5 +24,8 @@ public interface Storage{
 	public boolean deleteShip(Ships s);
 	public List<Ships> getShipsByID(int shipID);
 	public List<Ships> getAllShips();
+	
+	public List<Day> getCalendarForHarbourID(int harbourID);
+	public int getHarbourIDForVol(String vol);
 
 }

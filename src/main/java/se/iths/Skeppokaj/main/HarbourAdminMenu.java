@@ -3,12 +3,16 @@ package se.iths.Skeppokaj.main;
 import java.util.List;
 
 import se.iths.Skeppokaj.db.DBStorage;
+import se.iths.Skeppokaj.domain.Day;
 import se.iths.Skeppokaj.domain.Ships;
 
 public class HarbourAdminMenu{
+
+	private Storage storage = new DBStorage();
+
 	public void start(){
 		while(true){
-			Storage storage = new DBStorage();
+			//Storage storage = new DBStorage();
 			String choice = "";
 			System.out.println("");
 			System.out.println("---HAMNADMINISTRATION---");
@@ -62,6 +66,22 @@ public class HarbourAdminMenu{
 
 
 	private void showSchema(Ships ship) {
+		System.out.println("Shows schema?");
+		String vol = ship.getVolume();
+		int harbourID = storage.getHarbourIDForVol(vol);
+		if (harbourID != 0){
+			List<Day> calendar = storage.getCalendarForHarbourID(harbourID);
+			System.out.println("Må	Ti	On	To	Fr	Lö	Sö");
+			int i = 0;
+			for(Day d:calendar){
+				System.out.print(d.toString()+"	");
+				i++;
+				if(i % 7 == 0){
+					System.out.println();
+				}
+			}
+			System.out.println();
+		}
 		// TODO List schema for appropriate harbour
 		/*get ship volume
 		 * get appropriate harbour&no workers/machines from kajvol
@@ -120,7 +140,7 @@ public class HarbourAdminMenu{
 		}
 		return day;
 	}
-	
+
 	private boolean checkDayInCalendar(int day) {
 		//TODO Is day in the free calendar?
 		return false;

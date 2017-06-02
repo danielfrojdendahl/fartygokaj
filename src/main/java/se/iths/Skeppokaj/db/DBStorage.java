@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import se.iths.Skeppokaj.domain.Day;
 import se.iths.Skeppokaj.domain.Machines;
 import se.iths.Skeppokaj.domain.Personnel;
 import se.iths.Skeppokaj.domain.Ships;
@@ -295,6 +296,37 @@ public class DBStorage implements Storage{
 		return ships;
 	}
 	
+	public List<Day> getCalendarForHarbourID(int harbourID){
+		List<Day> calendar = new ArrayList<>();
+		try{
+			String sql = "SELECT  kaj_date, kaj_slot1, kaj_slot2, kaj_slot3 FROM kajcalendar WHERE kaj_id=" + harbourID;
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				Day d = new Day(rs.getInt("kaj_date"),rs.getInt("kaj_slot1"),rs.getInt("kaj_slot2"),rs.getInt("kaj_slot3"));
+				calendar.add(d);
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return calendar;
+	}
+	
+	public int getHarbourIDForVol(String vol){
+		int harbourID = 0;
+		try{
+			String sql = "SELECT kaj_id FROM kajvol WHERE kaj_volume='" +vol+ "'";
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				harbourID = rs.getInt("kaj_id");
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return harbourID;
+	}
+
 	
 }
 
