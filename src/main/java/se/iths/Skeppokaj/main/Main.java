@@ -1,34 +1,19 @@
 package se.iths.Skeppokaj.main;
 import java.util.InputMismatchException;
 import java.util.List;
-
 import se.iths.Skeppokaj.db.DBStorage;
 import se.iths.Skeppokaj.domain.Personnel;
+import se.iths.Skeppokaj.login.LoginMenu;
 import se.iths.Skeppokaj.login.LoginManager;
 public class Main{
 	public static void main(String[] args){
-		
+
 		//Login
-		boolean loginFalse = true;
-		while(loginFalse){
-			boolean emptyUsername = true;
-			String userName = "";
-			while (emptyUsername) {
-				userName = TextUtil.getReply("Användarnamn: ");
-				emptyUsername = userName.isEmpty();
-				if (emptyUsername) {
-					System.out.println("Vänligen ange ett registrerat användarnamn!");
-				}
-			}
-			String pwd = TextUtil.getReply("Lösenord: ");
-			LoginManager lm = new LoginManager(userName, pwd);
-			loginFalse = !lm.validate();
-			if(loginFalse){
-				System.out.println("Fel användarnamn eller lösenord, försök igen!");
-			}
-		}
-		
-		while(true){
+
+		LoginMenu lm = new LoginMenu();
+		lm.loginMenu();
+
+		while(true)  {
 			Storage storage = new DBStorage();
 			String choice = "";
 			drawShip();
@@ -39,7 +24,7 @@ public class Main{
 			System.out.println("2. Maskinadministration");
 			System.out.println("3. Hamnadministration");
 			System.out.println("4. Rapport");
-			System.out.println("5. Avsluta");
+			System.out.println("5. Logga in med annan användare");
 			while(!(choice.equals("1")||
 					choice.equals("2")||
 					choice.equals("3")||
@@ -61,14 +46,25 @@ public class Main{
 				ham.start();
 				break;
 			case "4":
-				System.out.println("Ta bort personal");	
+				System.out.println("Rapporter");	
 				break;
 			case "5":
-				System.out.println(" Bye ");
-				return;
+				lm.loginMenu();
+				System.out.println("Logga in med annan användare");
+				break;
 			}
-		}
+
+		} 
+
 	}
+
+
+
+
+
+
+
+
 
 	private static void drawShip() {
 		System.out.println("        /\\/\\");
@@ -83,7 +79,7 @@ public class Main{
 		System.out.println("     --------------------------");
 		System.out.println("      \\   O   O   O   O      /");
 		System.out.println(" ~ ~ ~ ~ ~ ~ ~ ~  ~ ~ ~ ~ ~ ~ ~ ~");
-		System.out.println("  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");		
+		System.out.println("  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");	
 	}
 
 
