@@ -39,4 +39,14 @@ public class Day {
 	public void setSlotThree(int slotThree) {
 		this.slotThree = slotThree;
 	}
+
+	@Override
+	public String toString() {
+		String s="L";
+		if(slotOne!=0||slotTwo!=0||slotThree!=0){
+			s="";
+		}
+		return date + "," + s;
+	}
+	
 }

@@ -1038,7 +1038,7 @@ INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(81,"Jenette","Tem
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(82,"Jolene","Maecenas Libero Est Corp.","AA01");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(83,"Ima","Lobortis Industries","AA01");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(84,"Illana","Augue Limited","AA01");
-INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(85,"Amelia","Ornare Company","AA01");
+INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(85,"Amelia","Ornare Company","A005");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(86,"Sheila","Eros Turpis Non Institute","AA01");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(87,"Savannah","Lobortis Risus In Limited","AA01");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(88,"Lora","Magna Lorem Limited","AA01");
@@ -1054,7 +1054,7 @@ INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(97,"Melanie","Nun
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(98,"Mary","Turpis Vitae PC","B001");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(99,"Marah","Non Justo Proin LLP","B001");
 INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(100,"Noelani","Magna Lorem Institute","B001");
-INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(101,"Cassidy","Eu Augue Institute","B001");
+INSERT INTO "ships" (S_id, S_name, S_company, S_volume) VALUES(101,"Cassidy","Eu Augue Institute","A005");
 DROP TABLE IF EXISTS "trucks";
 CREATE TABLE "trucks"(T_id integer primary key not null, T_type text check(T_type in ('A001','AA01','B001','BB01','C001','CC01','CCC1','K001')), T_status text check(T_status in('Ok','Reparation','Reserv','Skadad')));
 INSERT INTO "trucks" VALUES(1,"A001","Ok");
