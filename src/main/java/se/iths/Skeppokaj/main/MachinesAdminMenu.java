@@ -31,7 +31,7 @@ public class MachinesAdminMenu{
 				String machineStatus = TextUtil.getReply("Status: ");
 
 				Machines m = new Machines(machineType, machineStatus);
-				
+
 				if(storage.addMachine(m)){
 					System.out.println("Adderat ok");
 				}else{
@@ -46,12 +46,22 @@ public class MachinesAdminMenu{
 					System.out.println("Maskinen du söker finns ej i databasen.");
 					//break or ask again?
 				}else{
-					//Should we list all machines and have user select one? Searching the db by id should only generate one choice.
-					Machines m2 = machines2.get(0);
-					if(storage.deleteMachine(m2)){
-						System.out.println("Borttagning ok");
+					if (writePrompt(machID2)) {
+						boolean doDelete = askDelete();
+
+						if (doDelete) {
+							//Should we list all machines and have user select one? Searching the db by id should only generate one choice.
+							Machines m2 = machines2.get(0);
+							if(storage.deleteMachine(m2)){
+								System.out.println("Borttagning ok");
+							}else{
+								System.out.println("Borttagning fungerade ej, kolla .err");
+							}
+						}else {
+							break;
+						}
 					}else{
-						System.out.println("Borttagning fungerade ej, kolla .err");
+						break;
 					}
 				}
 				break;
@@ -80,7 +90,7 @@ public class MachinesAdminMenu{
 			}
 		}
 	}
-	
+
 	private static int getID() {
 		boolean notANumber = true;
 		int persID = 0;
@@ -93,5 +103,43 @@ public class MachinesAdminMenu{
 			}
 		}		
 		return persID;
+	}
+
+	private static boolean writePrompt(int id) {
+
+		Storage storage = new DBStorage();
+		List<Machines> m = storage.getMachinesByID(id);
+
+		if (m.size() == 1 ) {
+			Machines mach = m.get(0);
+
+			System.out.println("Vill du ta bort följande maskin: " + mach.getMachineType()+ ", status - " + mach.getMachineStatus() + " med ID: " + id + "?");
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+
+	private static boolean askDelete() {
+
+
+		boolean keepLooping = true;
+		while (keepLooping) {
+			String reply = TextUtil.getReply("För att ta bort maskinen skriv JA om inte skriv NEJ: ");
+
+			if (reply.equals("JA") || reply.equals("ja")) {
+				return true;
+
+			}
+			else if (reply.equals("NEJ") || reply.equals("nej")) {
+				return false;
+
+			}
+
+		}
+
+		return false;
 	}
 }
