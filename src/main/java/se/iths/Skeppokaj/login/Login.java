@@ -2,7 +2,7 @@ package se.iths.Skeppokaj.login;
 
 import se.iths.Skeppokaj.main.TextUtil;
 
-public class LoginMenu {
+public class Login {
 
 	public void loginMenu() {
 		boolean loginFalse = true;
@@ -22,7 +22,9 @@ public class LoginMenu {
 			if(loginFalse){
 				System.out.println("Fel användarnamn eller lösenord, försök igen!");
 			}
+
 		}
 
 	}
+
 }

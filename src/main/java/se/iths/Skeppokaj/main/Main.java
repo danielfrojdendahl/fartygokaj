@@ -3,14 +3,12 @@ import java.util.InputMismatchException;
 import java.util.List;
 import se.iths.Skeppokaj.db.DBStorage;
 import se.iths.Skeppokaj.domain.Personnel;
-import se.iths.Skeppokaj.login.LoginMenu;
+import se.iths.Skeppokaj.login.Login;
 import se.iths.Skeppokaj.login.LoginManager;
 public class Main{
 	public static void main(String[] args){
 
-		//Login
-
-		LoginMenu lm = new LoginMenu();
+		Login lm = new Login();
 		lm.loginMenu();
 
 		while(true)  {
@@ -53,17 +51,10 @@ public class Main{
 				System.out.println("Logga in med annan användare");
 				break;
 			}
-
+			
 		} 
-
+		
 	}
-
-
-
-
-
-
-
 
 
 	private static void drawShip() {
