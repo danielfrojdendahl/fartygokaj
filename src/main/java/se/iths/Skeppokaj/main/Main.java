@@ -22,12 +22,14 @@ public class Main{
 			System.out.println("2. Maskinadministration");
 			System.out.println("3. Hamnadministration");
 			System.out.println("4. Rapport");
-			System.out.println("5. Logga in med annan användare");
+			System.out.println("5. Logga in som annan användare");
+			System.out.println("6. Avsluta applikationen");
 			while(!(choice.equals("1")||
 					choice.equals("2")||
 					choice.equals("3")||
 					choice.equals("4")||
-					choice.equals("5"))){
+					choice.equals("5")||
+					choice.equals("6"))){
 				choice = TextUtil.getReply("Menyval: ");
 			}
 			switch(choice){
@@ -50,6 +52,9 @@ public class Main{
 				lm.loginMenu();
 				System.out.println("Logga in med annan användare");
 				break;
+			case "6":
+				System.out.println("Tack för att du använt SKEPPOKAJ!");
+				return;
 			}
 			
 		} 
