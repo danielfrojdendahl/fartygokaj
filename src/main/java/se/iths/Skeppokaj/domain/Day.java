@@ -3,6 +3,7 @@ package se.iths.Skeppokaj.domain;
 public class Day {
 
 	private int date;
+	private String dayOfWeek;
 	private int slotOne;
 	private int slotTwo;
 	private int slotThree;
@@ -13,14 +14,21 @@ public class Day {
 		this.slotOne = slotOne;
 		this.slotTwo = slotTwo;
 		this.slotThree = slotThree;
+		this.dayOfWeek = whatDay(date);
 	}
 	
+
 	public int getDate() {
 		return date;
 	}
 	public void setDate(int date) {
 		this.date = date;
 	}
+	
+	public String getDayOfWeek() {
+		return dayOfWeek;
+	}
+
 	public int getSlotOne() {
 		return slotOne;
 	}
@@ -38,6 +46,17 @@ public class Day {
 	}
 	public void setSlotThree(int slotThree) {
 		this.slotThree = slotThree;
+	}
+	
+	private String whatDay(int date) {
+		if(date<6){
+			dayOfWeek = "MF";
+		}else if(date==6){
+			dayOfWeek = "L";
+		}else{
+			dayOfWeek = "S";
+		}
+		return null;
 	}
 
 	@Override

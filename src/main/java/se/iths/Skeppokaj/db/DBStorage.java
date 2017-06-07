@@ -326,7 +326,66 @@ public class DBStorage implements Storage{
 		}
 		return harbourID;
 	}
+	
+	/**
+	 * Method to list a group of available workers for specified day, slot and ship
+	 * 
+	 * @param day The day we want a work group for
+	 * @param ship The ship that we want a work group for
+	 * @param slot The specific timeslot we want the group to work in
+	 * @return A list of workers
+	 */
+	public List<Personnel> getAvailableWorkers(Day day, Ships ship, int slot){
+		int numberOfWorkers = Integer.parseInt(ship.getVolume().substring(3));
+		String dayOfWeek = day.getDayOfWeek();
+		String licence = ship.getVolume().substring(0, 2);
+		
+		if(licence.substring(1).equals("0")){
+			licence = licence.substring(0, 1);
+		}
+		return null;
+	}
 
+	/**
+	 * Method to collect all booked workers for all other slots a specific day.
+	 * 
+	 * @param day The specific day
+	 * @param slot The slot we want to book
+	 * @return List of booked workers for specified day
+	 */
+	public List<Integer> getBookedWorkerForDay(Day day, int slot){
+		
+		int workGroupIdOther1 = 0;
+		int workGroupIdOther2 = 0;
+		List<Integer> bookedPersonnel = new ArrayList<>();
+		
+		//Get id of workgroups in the other slots
+		switch(slot){
+		
+		case 1: workGroupIdOther1 = day.getSlotTwo();
+				workGroupIdOther2 = day.getSlotThree();
+		break;
+		case 2: workGroupIdOther1 = day.getSlotOne();
+				workGroupIdOther2 = day.getSlotThree();
+		break;
+		case 3: workGroupIdOther1 = day.getSlotOne();
+				workGroupIdOther2 = day.getSlotTwo();
+		default: break;
+		}	
+		
+		try{
+			String sql = "SELECT pers_id FROM booked WHERE booked_id=" +workGroupIdOther1+ " OR booked_id=" +workGroupIdOther2;
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+				bookedPersonnel.add(rs.getInt("pers_id"));
+			}
+		}catch(SQLException e){
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return bookedPersonnel;
+	}
 	
 }
 
