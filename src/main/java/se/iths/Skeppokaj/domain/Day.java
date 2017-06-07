@@ -50,19 +50,18 @@ public class Day {
 	
 	private String whatDay(int date) {
 		if(date<6){
-			dayOfWeek = "MF";
+			return "MF";
 		}else if(date==6){
-			dayOfWeek = "L";
+			return "L";
 		}else{
-			dayOfWeek = "S";
+			return "S";
 		}
-		return null;
 	}
 
 	@Override
 	public String toString() {
 		String s="L";
-		if(slotOne!=0||slotTwo!=0||slotThree!=0){
+		if(slotOne!=0&&slotTwo!=0&&slotThree!=0){
 			s="";
 		}
 		return date + "," + s;

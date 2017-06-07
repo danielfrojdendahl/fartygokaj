@@ -66,11 +66,11 @@ public class HarbourAdminMenu{
 
 
 	private void showSchema(Ships ship) {
-		System.out.println("Shows schema?");
+		//System.out.println("Shows schema?");
 		String vol = ship.getVolume();
 		int harbourID = storage.getHarbourIDForVol(vol);
 		if (harbourID != 0){
-			List<Day> calendar = storage.getCalendarForHarbourID(harbourID);
+			List<Day> calendar = storage.getCalendarForHarbourID(harbourID, ship);
 			System.out.println("Må	Ti	On	To	Fr	Lö	Sö");
 			int i = 0;
 			for(Day d:calendar){

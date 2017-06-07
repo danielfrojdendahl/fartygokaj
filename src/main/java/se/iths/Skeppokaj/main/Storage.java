@@ -25,7 +25,7 @@ public interface Storage{
 	public List<Ships> getShipsByID(int shipID);
 	public List<Ships> getAllShips();
 	
-	public List<Day> getCalendarForHarbourID(int harbourID);
+	public List<Day> getCalendarForHarbourID(int harbourID, Ships ship);
 	public int getHarbourIDForVol(String vol);
 	public List<Personnel> getAvailableWorkers(Day day, Ships ship, int slot);
 

@@ -75,7 +75,7 @@ public class DBStorage implements Storage{
 		if(hasConnection()){
 			Statement stm = null;
 			int persID = p.getPersId();
-			
+
 			try{
 				String sql = "DELETE FROM personal WHERE p_id =" + persID;
 				stm = con.createStatement();
@@ -161,7 +161,7 @@ public class DBStorage implements Storage{
 		if(hasConnection()){
 			Statement stm = null;
 			int machineID = m.getMachineID();
-			
+
 			try{
 				String sql = "DELETE FROM trucks WHERE T_id =" + machineID;
 				stm = con.createStatement();
@@ -222,7 +222,7 @@ public class DBStorage implements Storage{
 			String shipName = s.getShipName();
 			String shipCompany = s.getCompany();
 			String shipVolume = s.getVolume();
-			
+
 			try{
 				String sql = "INSERT INTO ships(S_id, S_name, S_company, S_volume) VALUES(" + shipName + "','" + shipCompany + "','" + shipVolume + "')";
 				stm = con.createStatement();
@@ -230,7 +230,7 @@ public class DBStorage implements Storage{
 				System.out.println(shipName + "är nu adderad till databasen.");
 				return true;
 			}
-			
+
 			catch(SQLException e){
 				System.out.println(e.getMessage());
 				System.out.println("Kan inte lägga till fartyg" + " " + shipVolume +". Vänligen kontrollera insert statement");
@@ -238,12 +238,12 @@ public class DBStorage implements Storage{
 		}
 		return false;
 	}
-	
+
 	public boolean deleteShip(Ships s) {
 		if(hasConnection()){
 			Statement stm = null;
 			int shipID = s.getShipID();
-			
+
 
 			try{
 				String sql = "DELETE FROM ships WHERE S_id =" + shipID;
@@ -260,7 +260,7 @@ public class DBStorage implements Storage{
 		}
 		return false;
 	}
-	
+
 	public List<Ships> getShipsByID(int shipID){
 		List<Ships> ships = new ArrayList<>();
 		try{
@@ -295,15 +295,32 @@ public class DBStorage implements Storage{
 		}      
 		return ships;
 	}
-	
-	public List<Day> getCalendarForHarbourID(int harbourID){
+
+	public List<Day> getCalendarForHarbourID(int harbourID, Ships ship){
 		List<Day> calendar = new ArrayList<>();
 		try{
 			String sql = "SELECT  kaj_date, kaj_slot1, kaj_slot2, kaj_slot3 FROM kajcalendar WHERE kaj_id=" + harbourID;
 			ResultSet rs = con.createStatement().executeQuery(sql);
 			while(rs.next()){
-				Day d = new Day(rs.getInt("kaj_date"),rs.getInt("kaj_slot1"),rs.getInt("kaj_slot2"),rs.getInt("kaj_slot3"));
-				calendar.add(d);
+				Day day = new Day(rs.getInt("kaj_date"),rs.getInt("kaj_slot1"),rs.getInt("kaj_slot2"),rs.getInt("kaj_slot3"));
+				int slotOne = day.getSlotOne();
+				int slotTwo = day.getSlotTwo();
+				int slotThree = day.getSlotThree();
+
+
+				//Time to populate calendar. If timeslot is empty and there is not enough workers timeslot=-1, else just add day.
+				if(slotOne==0&&getAvailableWorkers(day, ship, 1)==null){
+					day.setSlotOne(-1);
+					calendar.add(day);
+				} else if(slotTwo==0&&getAvailableWorkers(day, ship, 2)==null){
+					day.setSlotTwo(-1);
+					calendar.add(day);
+				} else if(slotThree==0&&getAvailableWorkers(day, ship, 3)==null){
+					day.setSlotThree(-1);
+					calendar.add(day);
+				} else {
+					calendar.add(day);
+				}
 			}
 		}catch(SQLException e){
 			System.err.println("Error: " + e.getMessage());
@@ -311,7 +328,7 @@ public class DBStorage implements Storage{
 		}
 		return calendar;
 	}
-	
+
 	public int getHarbourIDForVol(String vol){
 		int harbourID = 0;
 		try{
@@ -326,53 +343,84 @@ public class DBStorage implements Storage{
 		}
 		return harbourID;
 	}
-	
+
 	/**
 	 * Method to list a group of available workers for specified day, slot and ship
 	 * 
 	 * @param day The day we want a work group for
 	 * @param ship The ship that we want a work group for
 	 * @param slot The specific timeslot we want the group to work in
-	 * @return A list of workers
+	 * @return A list of workers, returns null if the list is shorter than required.
 	 */
-	public List<Personnel> getAvailableWorkers(Day day, Ships ship, int slot){
+	public List<Personnel> getAvailableWorkers(Day day, Ships ship, int slotNr){
+		//System.out.println("slotnr: "+slotNr);
+		List<Personnel> availableWorkers = new ArrayList<>();
 		int numberOfWorkers = Integer.parseInt(ship.getVolume().substring(3));
+		//System.out.println("antal begära arbetare): "+numberOfWorkers);
 		String dayOfWeek = day.getDayOfWeek();
-		String licence = ship.getVolume().substring(0, 2);
-		
-		if(licence.substring(1).equals("0")){
-			licence = licence.substring(0, 1);
+		//System.out.println("veckodag: "+dayOfWeek+" datum: "+day.getDate());
+		List<Integer> bookedWorkersForDay = getBookedWorkersForDay(day, slotNr);
+		//System.out.println("Bokade arbetare för dag: "+bookedWorkersForDay.size());
+		String license = ship.getVolume().substring(0, 2);
+
+		if(license.substring(1).equals("0")){
+			license = license.substring(0, 1);
 		}
+
+		String sql = "SELECT p_id, Firstname, Lastname, License, Status, Schema FROM personal WHERE Schema='" +dayOfWeek+ "' AND License='" +license+ "' AND Status='100%'";
+		ResultSet rs;
+		try {
+			rs = con.createStatement().executeQuery(sql);
+
+			//System.out.println("rs storlek: "+rs.next());
+			while(rs.next()){
+				//System.out.println("p_id: "+rs.getInt("p_id"));
+				//System.out.println("finns i bookedworkers: "+bookedWorkersForDay.contains(rs.getInt("p_id")));
+				if(!bookedWorkersForDay.contains(rs.getInt("p_id"))){
+					Personnel p  = new Personnel(rs.getInt("p_id"),rs.getString("Firstname"),rs.getString("Lastname"),rs.getString("License"),rs.getString("Status"),rs.getString("Schema"));
+					availableWorkers.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		//System.out.println("tillgängliga arbetare st: "+availableWorkers.size());
+		if(availableWorkers.size()>= numberOfWorkers){
+			return availableWorkers.subList(0, numberOfWorkers);
+		}
+
 		return null;
 	}
 
 	/**
-	 * Method to collect all booked workers for all other slots a specific day.
+	 * Helpmethod to collect all booked workers for all other slots a specific day.
 	 * 
 	 * @param day The specific day
 	 * @param slot The slot we want to book
 	 * @return List of booked workers for specified day
 	 */
-	public List<Integer> getBookedWorkerForDay(Day day, int slot){
-		
+	private List<Integer> getBookedWorkersForDay(Day day, int slotNr){
+
 		int workGroupIdOther1 = 0;
 		int workGroupIdOther2 = 0;
 		List<Integer> bookedPersonnel = new ArrayList<>();
-		
+
 		//Get id of workgroups in the other slots
-		switch(slot){
-		
+		switch(slotNr){
+
 		case 1: workGroupIdOther1 = day.getSlotTwo();
-				workGroupIdOther2 = day.getSlotThree();
+		workGroupIdOther2 = day.getSlotThree();
 		break;
 		case 2: workGroupIdOther1 = day.getSlotOne();
-				workGroupIdOther2 = day.getSlotThree();
+		workGroupIdOther2 = day.getSlotThree();
 		break;
 		case 3: workGroupIdOther1 = day.getSlotOne();
-				workGroupIdOther2 = day.getSlotTwo();
+		workGroupIdOther2 = day.getSlotTwo();
 		default: break;
 		}	
-		
+
 		try{
 			String sql = "SELECT pers_id FROM booked WHERE booked_id=" +workGroupIdOther1+ " OR booked_id=" +workGroupIdOther2;
 			ResultSet rs = con.createStatement().executeQuery(sql);
@@ -383,9 +431,10 @@ public class DBStorage implements Storage{
 			System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		return bookedPersonnel;
 	}
-	
+
+
 }
 
