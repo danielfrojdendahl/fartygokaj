@@ -21,7 +21,7 @@ public class Main{
 			System.out.println("1. Personaladministration");
 			System.out.println("2. Maskinadministration");
 			System.out.println("3. Hamnadministration");
-			System.out.println("4. Rapport");
+			System.out.println("4. Rapporter");
 			System.out.println("5. Logga in som annan användare");
 			System.out.println("6. Avsluta applikationen");
 			while(!(choice.equals("1")||
@@ -46,7 +46,8 @@ public class Main{
 				ham.start();
 				break;
 			case "4":
-				System.out.println("Rapporter");	
+				ReportsAdminMenu rep = new ReportsAdminMenu();
+				rep.start();	
 				break;
 			case "5":
 				lm.loginMenu();
