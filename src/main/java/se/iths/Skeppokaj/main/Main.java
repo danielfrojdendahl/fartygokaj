@@ -50,7 +50,7 @@ public class Main{
 				break;
 			case "5":
 				lm.loginMenu();
-				System.out.println("Logga in med annan användare");
+				//System.out.println("Logga in med annan användare");
 				break;
 			case "6":
 				System.out.println("Tack för att du använt SKEPPOKAJ!");

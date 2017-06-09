@@ -1,5 +1,6 @@
 package se.iths.Skeppokaj.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import se.iths.Skeppokaj.db.DBStorage;
@@ -51,8 +52,8 @@ public class HarbourAdminMenu{
 					//Show schema for appropriate harbour for this ship
 					Ships ship = ships.get(0);
 					System.out.println("Skeppet "+ship.getShipName()+" är valt!");
-					showSchema(ship);
-					showMenu2();
+					List<Day> calendar = showSchema(ship);
+					showMenu2(calendar);
 				}
 				break;
 			case "2":
@@ -65,12 +66,13 @@ public class HarbourAdminMenu{
 	}
 
 
-	private void showSchema(Ships ship) {
+	private List<Day> showSchema(Ships ship) {
+		List<Day> calendar = new ArrayList<>();
 		//System.out.println("Shows schema?");
 		String vol = ship.getVolume();
 		int harbourID = storage.getHarbourIDForVol(vol);
 		if (harbourID != 0){
-			List<Day> calendar = storage.getCalendarForHarbourID(harbourID, ship);
+			calendar = storage.getCalendarForHarbourID(harbourID, ship);
 			System.out.println("Må	Ti	On	To	Fr	Lö	Sö");
 			int i = 0;
 			for(Day d:calendar){
@@ -88,10 +90,11 @@ public class HarbourAdminMenu{
 		 * select harbour&date from kaj_calendar where a timeslot is free
 		 * 
 		 */
+		return calendar;
 
 	}
 
-	private void showMenu2() {
+	private void showMenu2(List<Day> calendar) {
 
 		String choice = "";
 		System.out.println("1. Välj dag");
@@ -102,10 +105,8 @@ public class HarbourAdminMenu{
 		}
 		switch(choice){
 		case "1":
-			int i = getDay();
-			//TODO check answer is a number and a number in free days
-			//Show timeslots for day
-			showTimeSlots(i);
+			Day day = getDay(calendar);
+			showTimeSlots(day);
 			showMenu3();
 			break;
 		case "2":
@@ -116,41 +117,48 @@ public class HarbourAdminMenu{
 
 
 
-	private int getDay() {
+	private Day getDay(List<Day> calendar) {
+		
 		boolean notANumber = true;
 		boolean notAFreeDay = true;
-		int day = 0;
+		int date = 0;
 
 		while (notAFreeDay){
 			while (notANumber){
 				try{
-					day = Integer.parseInt(TextUtil.getReply("Dag: "));
+					date = Integer.parseInt(TextUtil.getReply("Dag: "));
 					notANumber = false;
-					if(checkDayInCalendar(day)){
-						notAFreeDay = false;
-
-					}else{
-						System.out.println("Vald dag ej tillgänglig. Kontrollera kalenden!");
-					}
 				}catch(NumberFormatException ex){
 					System.out.println("Ej giltigt värde, försök igen");
 				}
 			}
 			notANumber = true;
+			for(Day day:calendar){
+				if(checkDayInCalendar(day, date)){
+					notAFreeDay = false;
+					return day;
+				}else{
+					System.out.println("Vald dag ej tillgänglig. Kontrollera kalenden!");
+				}
+			}
 		}
-		return day;
+		return null;
 	}
 
-	private boolean checkDayInCalendar(int day) {
-		//TODO Is day in the free calendar?
-		return false;
+	private boolean checkDayInCalendar(Day day, int date) {
+		if(day.getDate()==date){
+			if(day.getSlotOne()!=0 && day.getSlotTwo()!= 0 && day.getSlotThree()!=0){
+				return false;
+			}
+		}
+		return true;
 	}
 
 
 
-	private void showTimeSlots(int day) {
-		//TODO List timeslots for chosen day
-
+	private void showTimeSlots(Day day) {
+		System.out.println("Slot1\tSlot2\tSlot3");
+		System.out.println(day.getSlotOne()+"\t"+day.getSlotTwo()+"\t"+day.getSlotThree());
 	}
 
 
