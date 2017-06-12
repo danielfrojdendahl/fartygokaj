@@ -30,11 +30,11 @@ public class LoginManager {
 
 	public boolean validate() {
 
-		if (loginModel.userName.equals(null) || loginModel.userName.equals("")) {
+		if (loginModel.userName == null || loginModel.userName.equals("")) {
 			return false;
 		}
 
-		if (loginModel.password.equals(null) || loginModel.password.equals("")) {
+		if (loginModel.password == null || loginModel.password.equals("")) {
 			return false;
 		}
 
