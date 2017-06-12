@@ -20,16 +20,14 @@ public class LoginManagerTest {
 		loginManager = new LoginManager("","");
 	}
 
-	@Ignore
-	//@Test
+	@Test
 	public void validateEmptyUserTest() {
 		loginManager = new LoginManager(null,"admin");
 
 		assertFalse(loginManager.validate());
 	}
 
-	@Ignore
-	//@Test
+	@Test
 	public void validateEmptyPwdTest() {
 		loginManager = new LoginManager("Sofia",null);
 
