@@ -33,6 +33,7 @@ public class HelpUtil {
 		while (notInList) {
 			System.out.println("Tillåtna volymtyper för skepp är: ");
 			System.out.println("A005, AA07, B005, BB07, C005, CC07, CCC5, K007");
+			validatedVolumeType = TextUtil.getReply("Maskintyp: ");
 			if (volumeType.contains(validatedVolumeType)) {
 				notInList = false;
 			}
