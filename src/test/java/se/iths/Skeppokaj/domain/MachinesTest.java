@@ -34,7 +34,7 @@ public class MachinesTest {
 
 	@Test
 	public void machineStatusTest() {
-		test.setMachineStatus("OK");
-		assertEquals("Test if machineStatus is set properly", "OK", test.getMachineStatus());
+		test.setMachineStatus("Ok");
+		assertEquals("Test if machineStatus is set properly", "Ok", test.getMachineStatus());
 	} 
 }
