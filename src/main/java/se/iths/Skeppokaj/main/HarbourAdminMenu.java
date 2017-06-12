@@ -84,12 +84,7 @@ public class HarbourAdminMenu{
 			}
 			System.out.println();
 		}
-		// TODO List schema for appropriate harbour
-		/*get ship volume
-		 * get appropriate harbour&no workers/machines from kajvol
-		 * select harbour&date from kaj_calendar where a timeslot is free
-		 * 
-		 */
+		
 		return calendar;
 
 	}
