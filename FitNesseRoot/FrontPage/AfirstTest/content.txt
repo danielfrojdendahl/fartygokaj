@@ -1,0 +1,10 @@
+!define TEST_SYSTEM {slim}
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\test-classes
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\classes
+!pomFile pom.xml
+| import |
+| se.iths.Skeppokaj.db |
+
+!| DBStorageTestFixture |
+| addPersonnelTest? |
+| true |

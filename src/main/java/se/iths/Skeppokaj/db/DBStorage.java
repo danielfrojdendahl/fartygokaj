@@ -29,6 +29,7 @@ public class DBStorage implements Storage{
 			con = DriverManager.getConnection(PATH);
 		}catch(ClassNotFoundException|SQLException e){
 			System.err.println("Exception getting connection: " + e.getMessage());
+			System.err.println("Something: "+e.toString());
 		}
 	}
 

@@ -1,0 +1,29 @@
+I pom-filen:
+Här finns en flagga "-p 90" (på rad 33 just nu) som sätter vilken port du öppnar fitnesse på. Ändra till den port du vill använda.
+
+Starta fitnesse:
+Öppna en terminal och ställ dig i rätt mapp, dvs den mapp där pom-filen ligger, fartygokaj/
+Skriv mvn -Pfitnesse test
+Detta kommer visserligen att köra alla våra unit-testfiler men även att starta fitnesse.
+Surfa in på localhoast:90 (eller vilken port du nu ha valt ovan)
+
+I fitnesse:
+Woop! En framsida. Tryck Edit.
+Skriv <NamnPåDittTestTest
+Spara
+Tryck på frågetecknet.
+Skriv in följande (men ändra path:en så den pekar på var du lagt fartygokaj):
+
+!define TEST_SYSTEM {slim}
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\test-classes
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\classes
+!pomFile pom.xml
+| import |
+| se.iths.Skeppokaj.db |
+
+!| DBStorageTestFixture |
+| addPersonnelTest? |
+| true |
+
+
+Voila! Ett första test med databas och allt.

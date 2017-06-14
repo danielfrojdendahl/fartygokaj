@@ -13,7 +13,47 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<profiles>
+		<profile>
+			<id>fitnesse</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>start-fitnesse</id>
+								<phase>test</phase>
+								<configuration>
+									<tasks>
+										<echo taskname="fitnesse" message="Starting FitNesse..." />
+										<java classname="fitnesseMain.FitNesseMain" classpathref="maven.runtime.classpath"
+											fork="true">
+											<arg line="-p 90" />
+											<arg line="-d ." />
+										</java>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.fitnesse.plugins</groupId>
+					<artifactId>maven-classpath-plugin</artifactId>
+					<version>1.6</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
 
+		</profile>
+	</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -26,6 +66,13 @@
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.16.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.fitnesse</groupId>
+			<artifactId>fitnesse</artifactId>
+			<version>20121220</version>
+			<scope>runtime</scope>
+		</dependency>
+
 
 
 	</dependencies>
