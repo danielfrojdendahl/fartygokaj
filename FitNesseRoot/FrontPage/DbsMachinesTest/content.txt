@@ -1,0 +1,42 @@
+!define TEST_SYSTEM {slim}
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\test-classes
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\classes
+!pomFile pom.xml
+| import |
+| se.iths.Skeppokaj.db |
+
+Test of add
+
+!| DBStorageMachinesFixture |
+| MachineType| MachineStatus| addMachinesTest? |
+| A001 | Ok | true |
+
+Test of delete
+
+!| DBStorageMachinesFixture |
+| MachineType| MachineStatus| MachineId| MachineCost| addMachinesTest? |
+| A001 | Ok | 2000 | 1000 | true |
+
+!| DBStorageMachinesFixture |
+| MachineId | deleteMachinesTest? |
+| 1111 | true |
+
+Test of update
+
+!| DBStorageMachinesFixture |
+| MachineType| MachineStatus| MachineId| MachineCost| addMachinesTest? |
+| A001 | Ok | 2000 | 1000 | true |
+
+!| DBStorageMachinesFixture |
+| NewStatus | updateStatusMachineTest? |
+| Reserv | true |
+
+Test of search function
+
+!| DBStorageMachinesFixture |
+| MachineType| MachineStatus| MachineId| MachineCost| addMachinesTest? |
+| A001 | Ok | 2000 | 1000 | true |
+
+!| DBStorageMachinesFixture |
+| SoughtID | getMachineByIDTest? |
+| 1111 | |

@@ -1,0 +1,42 @@
+!define TEST_SYSTEM {slim}
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\test-classes
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\classes
+!pomFile pom.xml
+| import |
+| se.iths.Skeppokaj.db |
+
+Test of add
+
+!| DBStoragePersonnelFixture |
+| FirstName | LastName | License | Status | Schema | addPersonnelTest? |
+| Kalle | Kula | A | 50% | LS | true |
+
+Test of delete
+
+!| DBStoragePersonnelFixture |
+| Id | FirstName | LastName | License | Status | Schema | addPersonnelTest? |
+| 1111 | Apa | Bepa | A | 100% | MF | true |
+
+!| DBStoragePersonnelFixture |
+| Id | deletePersonnelTest? |
+| 1111 | true |
+
+Test of update
+
+!| DBStoragePersonnelFixture |
+| Id | FirstName | LastName | License | Status | Schema | addPersonnelTest? |
+| 1111 | Apa | Bepa | A | 100% | MF | true |
+
+!| DBStoragePersonnelFixture |
+| NewStatus | updateStatusPersonnelTest? |
+| 50% | true |
+
+Test of search function
+
+!| DBStoragePersonnelFixture |
+| Id | FirstName | LastName | License | Status | Schema | addPersonnelTest? |
+| 1111 | Apa | Bepa | A | 100% | MF | true |
+
+!| DBStoragePersonnelFixture |
+| SoughtID | getPersonnelByIDTest? |
+| 1111 | |
