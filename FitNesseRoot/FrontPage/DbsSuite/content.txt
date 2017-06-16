@@ -1,2 +1,3 @@
 !see DbsPersonnelTest
 !see DbsMachinesTest
+!see DbsShipsTest

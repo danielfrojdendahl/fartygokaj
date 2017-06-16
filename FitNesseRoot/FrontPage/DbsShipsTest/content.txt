@@ -1,0 +1,36 @@
+!define TEST_SYSTEM {slim}
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\test-classes
+!path C:\Users\Kråkan\workspace\Skeppokaj\fartygokaj\target\classes
+!pomFile pom.xml
+| import |
+| se.iths.Skeppokaj.db |
+
+Test of add
+
+!| DBStorageShipsFixture |
+| ShipName| ShipCompany | ShipVolume | addShipsTest? |
+| Älvira | Styrsjöbolaget | A005 | true |
+
+Test of delete
+
+!| DBStorageShipsFixture |
+| ShipId | ShipName| ShipCompany | ShipVolume | addShipsTest? |
+| 1000 | Älvira | Styrsjöbolaget | A005 | true |
+
+!| DBStorageShipsFixture |
+| ShipId | deleteShipsTest? |
+| 1000 | true |
+
+Test of search functions
+
+!| DBStorageShipsFixture |
+| ShipId | ShipName| ShipCompany | ShipVolume | addShipsTest? |
+| 1000 | Älvira | Styrsjöbolaget | A005 | true |
+
+!| DBStorageShipsFixture |
+| SoughtID | getShipsByIDTest? |
+| 1000 | |
+
+!| DBStorageShipsFixture |
+|getAllShipsTest?|
+| |

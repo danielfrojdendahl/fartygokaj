@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<suiteResults>
+  <FitNesseVersion>v20121220</FitNesseVersion>
+  <rootPath>DbsSuite</rootPath>
+    <pageHistoryReference>
+    <name>FrontPage.DbsPersonnelTest</name>
+    <date>06/14/2017 14:14:43</date>
+    <pageHistoryLink>FrontPage.DbsPersonnelTest?pageHistory&amp;resultDate=20170614141443</pageHistoryLink>
+    <counts>
+      <right>6</right>
+      <wrong>0</wrong>
+      <ignores>1</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <runTimeInMillis>447</runTimeInMillis>
+  </pageHistoryReference>
+    <pageHistoryReference>
+    <name>FrontPage.DbsMachinesTest</name>
+    <date>06/14/2017 14:14:43</date>
+    <pageHistoryLink>FrontPage.DbsMachinesTest?pageHistory&amp;resultDate=20170614141443</pageHistoryLink>
+    <counts>
+      <right>6</right>
+      <wrong>0</wrong>
+      <ignores>1</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <runTimeInMillis>111</runTimeInMillis>
+  </pageHistoryReference>
+    <pageHistoryReference>
+    <name>FrontPage.DbsShipsTest</name>
+    <date>06/14/2017 14:14:44</date>
+    <pageHistoryLink>FrontPage.DbsShipsTest?pageHistory&amp;resultDate=20170614141444</pageHistoryLink>
+    <counts>
+      <right>4</right>
+      <wrong>0</wrong>
+      <ignores>2</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <runTimeInMillis>89</runTimeInMillis>
+  </pageHistoryReference>
+    <finalCounts>
+    <right>3</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>1568</totalRunTimeInMillis>
+
+</suiteResults>
+

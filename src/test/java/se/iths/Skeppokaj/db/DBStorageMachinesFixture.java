@@ -81,7 +81,7 @@ public class DBStorageMachinesFixture {
 	}
 
 	public List<Machines> getMachineByIDTest(){
-		Machines m = new Machines(machineId, machineType, machineStatus, machineCost);
+		//Machines m = new Machines(machineId, machineType, machineStatus, machineCost);
 		return storage.getMachinesByID(soughtID);
 	}
 }

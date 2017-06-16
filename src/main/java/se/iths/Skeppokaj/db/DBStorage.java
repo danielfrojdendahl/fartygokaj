@@ -225,10 +225,10 @@ public class DBStorage implements Storage{
 			String shipVolume = s.getVolume();
 
 			try{
-				String sql = "INSERT INTO ships(S_id, S_name, S_company, S_volume) VALUES(" + shipName + "','" + shipCompany + "','" + shipVolume + "')";
+				String sql = "INSERT INTO ships(S_name, S_company, S_volume) VALUES('" + shipName + "','" + shipCompany + "','" + shipVolume + "')";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
-				System.out.println(shipName + "är nu adderad till databasen.");
+				System.out.println(shipName + " är nu adderad till databasen.");
 				return true;
 			}
 
